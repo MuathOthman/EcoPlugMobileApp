@@ -1,10 +1,16 @@
 import React from "react";
-import {StyleSheet,Text, View} from "react-native";
+import {StyleSheet,Text, View, TextInput} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 
 export default function Navbar() {
     return (
         <View style={styles.container}>
+            <View style={{ justifyContent: "space-between"}}>
+                <TextInput
+                    style={{height: 50, width: "100%"}}
+                    placeholder="Search"
+                />
+            </View>
         </View>
     );
 }
@@ -13,16 +19,18 @@ const styles = StyleSheet.create({
     container: {
         zIndex: 100,
         position: 'absolute',
-        bottom: 0,
-        backgroundColor: "#F6F6F6",
+        top: 110,
+        backgroundColor: "white",
         padding: 30,
-        width: "100%",
-        height: 120,
+        width: "90%",
+        height: 50,
         borderRadius: 40,
         alignSelf: 'center', // This will center the navbar in the parent container
+        borderColor: "black",
+        borderWidth: 0.5,
     },
     text: {
-        color: "white",
+        color: "black",
         fontSize: 25,
     },
 });

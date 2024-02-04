@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import Welcome from "./Welcome/Welcome";
 import MapView from "react-native-maps";
 import Navbar from "./Navigation/Navbar";
-import Main from "./Main/Main";
+import Map from "./Main/Map";
 
 export default function App() {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -29,7 +29,7 @@ export default function App() {
             </Animated.View>
         )}
         {!showWelcome &&
-            <Main />
+            <Map />
         }
       </View>
   );
