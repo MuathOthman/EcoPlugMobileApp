@@ -1,9 +1,9 @@
 import {StyleSheet, View, Animated} from 'react-native';
 import React, {useEffect, useRef, useState} from "react";
-import Welcome from "./Welcome/Welcome";
+import Welcome from "./Pages/Welcome";
 import MapView from "react-native-maps";
-import Navbar from "./Navigation/Navbar";
-import Map from "./Main/Map";
+import Navbar from "./Components/Navbar";
+import Map from "./Components/Map";
 
 export default function App() {
   const [showWelcome, setShowWelcome] = useState(true);
