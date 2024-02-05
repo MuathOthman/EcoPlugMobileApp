@@ -6,6 +6,7 @@ import WelcomePage from "./Pages/WelcomePage";
 import SearchPage from "./Pages/SearchPage";
 import Map from "./Components/Map";
 import Navbar from "./Components/Navbar";
+import Reservation from "./Components/Reservation";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,23 +22,30 @@ export default function App() {
     }, []);
 
     return (
-        <NavigationContainer>
-            {showWelcome ? (
-                <WelcomePage />
-            ) : (
-                <Tab.Navigator tabBar={(props) => <Navbar {...props} />}>
-                    <Tab.Screen
-                        name="Home"
-                        component={Map}
-                        options={{ tabBarLabel: '', headerShown: false }}
-                    />
-                    <Tab.Screen
-                        name="CarSport"
-                        component={SearchPage}
-                        options={{ tabBarLabel: '', headerShown: false }}
-                    />
-                </Tab.Navigator>
-            )}
-        </NavigationContainer>
+            <NavigationContainer>
+                {showWelcome ? (
+                    <WelcomePage />
+                ) : (
+                    <Tab.Navigator tabBar={(props) => <Navbar {...props} />}>
+                        <Tab.Screen
+                            name="Home"
+                            component={Map}
+                            options={{ tabBarLabel: '', headerShown: false }}
+                        />
+                        <Tab.Screen
+                            name="CarSport"
+                            component={SearchPage}
+                            options={{ tabBarLabel: '', headerShown: false }}
+                        />
+                        <Tab.Screen
+                            name="Reservation"
+                            component={Reservation}
+                            options={{ tabBarLabel: '', headerShown: false }}
+                        />
+                    </Tab.Navigator>
+                )}
+            </NavigationContainer>
     );
 }
+
+

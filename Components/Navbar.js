@@ -17,6 +17,9 @@ export default function Navbar() {
             case 1:
                 navigation.navigate("CarSport");
                 break;
+            case 2:
+                navigation.navigate("Reservation");
+                break;
             default:
                 break;
         }

@@ -5,6 +5,7 @@ import BackButton from "../Components/BackButton";
 
 export default function Navbar() {
     return (
+        <View style={styles.containers}>
         <View style={styles.container}>
             <BackButton />
             <Text style={styles.text}>Charging Stations</Text>
@@ -13,15 +14,25 @@ export default function Navbar() {
                 <Text>Search</Text>
                 </View>
         </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    containers: {
         flex: 1,
         backgroundColor: "#FDF6E9",
         alignItems: "center",
         justifyContent: "center",
+    },
+    container: {
+        position: 'absolute',
+        top: 40,
+        padding: 30,
+        width: "100%",
+        height: 120,
+        borderRadius: 40,
+        alignSelf: 'center'
     },
     text: {
         top: 40,
