@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MapView from 'react-native-maps';
 import { StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
+import Navbar from "./Navbar";
 
 export default function Map() {
     const [region, setRegion] = useState({
@@ -34,6 +35,7 @@ export default function Map() {
             style={styles.map}
             region={region}
             showsUserLocation={true}>
+            <Navbar/>
         </MapView>
     );
 }

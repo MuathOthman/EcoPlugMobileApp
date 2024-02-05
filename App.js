@@ -1,6 +1,7 @@
 import {StyleSheet, View, Animated} from 'react-native';
 import React, {useEffect, useRef, useState} from "react";
 import WelcomePage from "./Pages/WelcomePage";
+import Reservation from "./Components/Reservation";
 import MapView from "react-native-maps";
 import Navbar from "./Components/Navbar";
 import Map from "./Components/Map";
@@ -31,7 +32,8 @@ export default function App() {
         )}
         {!showWelcome &&
             //<Map />
-            <SearchPage />
+            //<SearchPage />
+            <Reservation />
         }
       </View>
   );
