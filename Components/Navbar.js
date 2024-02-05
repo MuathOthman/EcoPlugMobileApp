@@ -20,6 +20,9 @@ export default function Navbar() {
             case 2:
                 navigation.navigate("Reservation");
                 break;
+            case 3:
+                navigation.navigate("Availability");
+                break;
             default:
                 break;
         }

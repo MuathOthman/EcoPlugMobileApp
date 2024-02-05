@@ -7,6 +7,8 @@ import SearchPage from "./Pages/SearchPage";
 import Map from "./Components/Map";
 import Navbar from "./Components/Navbar";
 import Reservation from "./Components/Reservation";
+import CodeConfirm from "./Components/CodeConfirm";
+import Availability from "./Components/Availability";
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +41,12 @@ export default function App() {
                         />
                         <Tab.Screen
                             name="Reservation"
-                            component={Reservation}
+                            component={CodeConfirm}
+                            options={{ tabBarLabel: '', headerShown: false }}
+                        />
+                        <Tab.Screen
+                            name="Availability"
+                            component={Availability}
                             options={{ tabBarLabel: '', headerShown: false }}
                         />
                     </Tab.Navigator>
