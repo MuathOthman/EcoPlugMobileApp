@@ -9,6 +9,7 @@ import Navbar from "./Components/Navbar";
 import Reservation from "./Components/Reservation";
 import CodeConfirm from "./Components/CodeConfirm";
 import Availability from "./Components/Availability";
+import PlugLocation from "./Components/PlugLocation";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ export default function App() {
                         />
                         <Tab.Screen
                             name="CarSport"
-                            component={SearchPage}
+                            component={PlugLocation}
                             options={{ tabBarLabel: '', headerShown: false }}
                         />
                         <Tab.Screen

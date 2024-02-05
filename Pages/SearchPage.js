@@ -1,9 +1,8 @@
 import React from "react";
 import {StyleSheet, Text, TextInput, View} from "react-native";
-import SearchBar from "../Components/SearchBar";
 import BackButton from "../Components/BackButton";
 
-export default function Navbar() {
+export default function SearchPage() {
     return (
         <View style={styles.containers}>
         <View style={styles.container}>
@@ -12,7 +11,7 @@ export default function Navbar() {
             <TextInput style={styles.field} placeholder="Search for charging stations"/>
             <View style={{backgroundColor: "white", top: 80, width: "150%"}}>
                 <Text>Search</Text>
-                </View>
+            </View>
         </View>
         </View>
     );
