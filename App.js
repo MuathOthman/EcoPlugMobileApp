@@ -1,9 +1,10 @@
 import {StyleSheet, View, Animated} from 'react-native';
 import React, {useEffect, useRef, useState} from "react";
-import Welcome from "./Pages/Welcome";
+import WelcomePage from "./Pages/WelcomePage";
 import MapView from "react-native-maps";
 import Navbar from "./Components/Navbar";
 import Map from "./Components/Map";
+import SearchPage from "./Pages/SearchPage";
 
 export default function App() {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -25,11 +26,12 @@ export default function App() {
       <View style={styles.container}>
         {showWelcome && (
             <Animated.View style={[styles.fadeContainer, {opacity: fadeAnim}]}>
-              <Welcome />
+              <WelcomePage />
             </Animated.View>
         )}
         {!showWelcome &&
-            <Map />
+            //<Map />
+            <SearchPage />
         }
       </View>
   );
