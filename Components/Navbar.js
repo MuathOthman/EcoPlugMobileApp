@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Navbar() {
-    const [activeIcon, setActiveIcon] = useState(null);
+    const navigation = useNavigation();
+    const [activeIcon, setActiveIcon] = useState(0);
 
     const handleIconPress = (index) => {
         setActiveIcon(index);
+
+        switch (index) {
+            case 0:
+                navigation.navigate("Home");
+                break;
+            case 1:
+                navigation.navigate("CarSport");
+                break;
+            default:
+                break;
+        }
     };
 
     return (
@@ -46,18 +59,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         zIndex: 100,
         position: "absolute",
-        bottom: 75,
-        backgroundColor: "#F0F0F0",
+        bottom: 60,
+        backgroundColor: "white",
         width: "90%",
         height: 78,
-        borderRadius: 40,
+        borderRadius: 50,
         alignSelf: "center",
     },
     iconContainer: {
-        padding: 20,
+        padding: 21,
         borderRadius: 30,
     },
     activeIcon: {
-        backgroundColor: "white",
+        backgroundColor: "#F0F0F0",
     },
 });

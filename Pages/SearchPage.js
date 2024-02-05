@@ -18,13 +18,10 @@ export default function Navbar() {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        top: 40,
-        padding: 30,
-        width: "100%",
-        height: 120,
-        borderRadius: 40,
-        alignSelf: 'center', // This will center the navbar in the parent container
+        flex: 1,
+        backgroundColor: "#FDF6E9",
+        alignItems: "center",
+        justifyContent: "center",
     },
     text: {
         top: 40,
@@ -38,7 +35,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 50,
         borderRadius: 10,
-        alignSelf: 'center', // This will center the navbar in the parent container
+        alignSelf: 'center',
         borderColor: "black",
         borderWidth: 1,
     },
