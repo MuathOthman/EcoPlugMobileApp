@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import BackButton from "../Components/BackButton";
+import BackButton from "./BackButton";
 
 export default function CodeConfirm() {
     return (
