@@ -1,4 +1,3 @@
-const sijainnitModel = require('../models/sijainnitModels');
 const connection = require('../config/db');
 
 // Get all sijainnit

@@ -1,59 +1,72 @@
-import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
+import React, { useState } from 'react';
+
+
 
 export default function CodeConfirm() {
+    const [verificationCode, setVerificationCode] = useState('');
+
+    const handleCodeChange = (index, value) => {
+        if (/^\d+$/.test(value) || value === '') {
+            const newCode = verificationCode.split('');
+            newCode[index] = value;
+            setVerificationCode(newCode.join(''));
+        }
+    };
+    const handleContinuePress = () => {
+        // You can add your logic here for what should happen when the continue button is pressed
+        console.log('Verification Code:', verificationCode);
+    };
+
     return (
         <View style={styles.containers}>
-        <View style={styles.codeConfirm}>
-            <BackButton />
+            <View style={styles.codeConfirm}>
+                <BackButton />
 
-            {/* Confirmation Text */}
-            <Text style={styles.confirmationText}>Confirmation</Text>
+                {/* Confirmation Text */}
+                <Text style={styles.confirmationText}>Confirmation</Text>
 
-            {/* Main Header */}
-            <Text style={styles.headerText}>Sellon Parkki</Text>
+                {/* Main Header */}
+                <Text style={styles.headerText}>Sellon Parkki</Text>
 
-            {/* Header */}
-            <View style={styles.header}>
-                {/* Additional Text Elements */}
-                <Text style={styles.additionalText}>Myllypurontie 5 C</Text>
-                <Text style={styles.additionalText}>1234</Text>
-                <Text style={styles.chargeId}>ABCD</Text>
+                {/* Header */}
+                <View style={styles.header}>
+                    {/* Additional Text Elements */}
+                    <Text style={styles.additionalText}>Myllypurontie 5 C</Text>
+                    <Text style={styles.additionalText}>1234</Text>
+                    <Text style={styles.chargeId}>ABCD</Text>
 
+                </View>
+
+                {/* Verification Text */}
+                <Text style={styles.verificationText}>Verification code was sent to</Text>
+
+                {/* Phone Number Display */}
+                <Text style={styles.phoneNumber}>+358 123456789</Text>
+
+                {/* Code Input */}
+                <View style={styles.codeInputContainer}>
+                    {[0, 1, 2, 3].map((index) => (
+                        <TextInput
+                            key={index}
+                            style={styles.codeInput}
+                            maxLength={1}
+                            value={verificationCode[index]}
+                            onChangeText={(value) => handleCodeChange(index, value)}
+                        />
+                    ))}
+                </View>
+
+                {/* Continue Button */}
+                <TouchableOpacity
+                    style={styles.continueButton}
+                    onPress={handleContinuePress}
+                    disabled={verificationCode.length < 4}
+                >
+                    <Text style={styles.buttonText}>Continue</Text>
+                </TouchableOpacity>
             </View>
-
-            {/* Verification Text */}
-            <Text style={styles.verificationText}>Verification code was sent to</Text>
-
-            {/* Phone Number Display */}
-            <Text style={styles.phoneNumber}>+358 123456789</Text>
-
-            {/* Code Input */}
-            <View style={styles.codeInputContainer}>
-                <TextInput
-                    style={styles.codeInput}
-                    maxLength={1}
-                />
-                <TextInput
-                    style={styles.codeInput}
-                    maxLength={1}
-                />
-                <TextInput
-                    style={styles.codeInput}
-                    maxLength={1}
-                />
-                <TextInput
-                    style={styles.codeInput}
-                    maxLength={1}
-                />
-            </View>
-
-            {/* Continue Button */}
-            <TouchableOpacity style={styles.continueButton}>
-                <Text style={styles.buttonText}>Continue</Text>
-            </TouchableOpacity>
-        </View>
         </View>
     );
 }

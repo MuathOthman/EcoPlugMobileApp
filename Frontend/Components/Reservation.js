@@ -1,42 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
 
 export default function Reservation() {
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const handlePhoneNumberChange = (value) => {
+        // You can add additional validation if needed
+        setPhoneNumber(value);
+    };
+
+    const handleContinuePress = () => {
+        // You can add your logic here for what should happen when the continue button is pressed
+        console.log('Phone Number:', phoneNumber);
+    };
+
     return (
         <View style={styles.containers}>
-        <View style={styles.reservation}>
-            <BackButton />
+            <View style={styles.reservation}>
+                <BackButton />
 
-            {/* Confirmation Text */}
-            <Text style={styles.confirmationText}>Confirmation</Text>
-            {/* Main Header */}
-            <Text style={styles.headerText}>Sellon Parkki</Text>
-            {/* Header */}
-            <View style={styles.header}>
-                {/* Additional Text Elements */}
-                <Text style={styles.additionalText}>Address: 123 Main St</Text>
-                <Text style={styles.additionalText}>1234</Text>
+                {/* Confirmation Text */}
+                <Text style={styles.confirmationText}>Confirmation</Text>
+                {/* Main Header */}
+                <Text style={styles.headerText}>Sellon Parkki</Text>
+                {/* Header */}
+                <View style={styles.header}>
+                    {/* Additional Text Elements */}
+                    <Text style={styles.additionalText}>Address: 123 Main St</Text>
+                    <Text style={styles.additionalText}>1234</Text>
+                </View>
 
+                {/* Container for phone number input */}
+                <View style={styles.container}>
+                    {/* Phone Number Input */}
+                    <TextInput
+                        style={styles.field}
+                        placeholder="Enter your phone number (+358)"
+                        keyboardType="phone-pad"
+                        value={phoneNumber}
+                        onChangeText={handlePhoneNumberChange}
+                    />
 
-            </View>
-
-            {/* Container for phone number input */}
-            <View style={styles.container}>
-                {/* Phone Number Input */}
-                <TextInput
-                    style={styles.field}
-                    placeholder="Enter your phone number (+358)"
-                    keyboardType="phone-pad"
-                />
-
-                {/* Continue Button */}
-                <TouchableOpacity style={styles.continueButton}>
-                    <Text style={styles.buttonText}>Continue</Text>
-                </TouchableOpacity>
+                    {/* Continue Button */}
+                    <TouchableOpacity
+                        style={styles.continueButton}
+                        onPress={handleContinuePress}
+                        disabled={!phoneNumber}
+                    >
+                        <Text style={styles.buttonText}>Continue</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
-</View>
     );
 }
 
