@@ -37,7 +37,7 @@ export default function App() {
                         />
                         <Tab.Screen
                             name="CarSport"
-                            component={PlugLocation}
+                            component={SearchPage}
                             options={{ tabBarLabel: '', headerShown: false }}
                         />
                         <Tab.Screen

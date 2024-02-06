@@ -1,30 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-export default function PlugLocation() {
+export default function PlugLocation({ name, address, postalCode, city }) {
     return (
-        <View style={styles.container}>
-            <View style={styles.innerContainer}>
-                <Icon name="charging-station" size={45} color="black" />
-                <View style={styles.textContainer}>
-                    <Text style={styles.header}>Sellon Parkki</Text>
-                    <Text style={styles.smallText}>Hevosenkenkä 4, 02600 Espoo</Text>
-                </View>
+        <View style={styles.innerContainer}>
+            <Icon name="charging-station" size={45} color="black" />
+            <View style={styles.textContainer}>
+                <Text style={styles.header}>{name}</Text>
+                <Text style={styles.smallText}>{`${address} ${postalCode} ${city}`}</Text>
             </View>
         </View>
     );
 }
 
+// Define your styles here
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FDF6E9',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     innerContainer: {
-        backgroundColor:"white",
+        top: 40,
+        width: 430,
+        backgroundColor: "white",
         flexDirection: 'row',
         alignItems: 'center',
         padding: 20,
