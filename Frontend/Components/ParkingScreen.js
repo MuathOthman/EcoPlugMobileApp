@@ -5,9 +5,7 @@ import BackButton from "./BackButton";
 export default function ParkingScreen() {
     return (
         <View style={styles.container}>
-            <View style={styles.backButton}>
                 <BackButton />
-            </View>
             <Text style={styles.headerText}>Sellon Parkki</Text>
             <Text style={styles.header2Text}>Hevosenkenkä 4, 02600 Espoo</Text>
             <Text style={styles.subText}>CHOOSE AVAILABLE PARKING</Text>

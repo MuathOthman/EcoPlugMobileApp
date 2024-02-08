@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import WelcomePage from "./Pages/WelcomePage";
 import SearchPage from "./Pages/SearchPage";
 import Map from "./Components/Map";
 import Navbar from "./Components/Navbar";
-import Reservation from "./Components/Reservation";
 import CodeConfirm from "./Components/CodeConfirm";
 import Availability from "./Components/Availability";
-import PlugLocation from "./Components/PlugLocation";
+import ParkingScreen from "./Components/ParkingScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,8 +45,8 @@ export default function App() {
                         />
                         <Tab.Screen
                             name="Availability"
-                            component={Availability}
-                            options={{ tabBarLabel: '', headerShown: false }}
+                            component={ParkingScreen}
+                            options={{ tabBarLabel: '', headerShown: false}}
                         />
                     </Tab.Navigator>
                 )}

@@ -8,9 +8,17 @@ function BackButton() {
     }
     return (
         <View>
-            <Ionicons name="arrow-back-outline" size={26} color="black" onPress={goBack}/>
+            <Ionicons style={styles.backButton} name="arrow-back-outline" size={26} color="black" onPress={goBack}/>
         </View>
     );
+}
+
+const styles = {
+    backButton: {
+        position: "absolute",
+        top: 40,
+        left: 20,
+    }
 }
 
 export default BackButton;
