@@ -17,9 +17,8 @@ export default function Reservation() {
 
     return (
         <View style={styles.containers}>
+            <BackButton />
             <View style={styles.reservation}>
-                <BackButton />
-
                 {/* Confirmation Text */}
                 <Text style={styles.confirmationText}>Confirmation</Text>
                 {/* Main Header */}

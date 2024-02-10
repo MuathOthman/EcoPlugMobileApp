@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import PlugLocation from "./PlugLocation";
 
-export default function Type({name, address, postalCode, city,}) {
+export default function Type({ name, address, postalCode, city, setIsVisible }) {
+    const handleClose = () => {
+        setIsVisible(false);
+        console.log("Closed");
+    };
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity
+                style={styles.closeButton}
+                onPress={handleClose}
+            >
+                <Text style={styles.closeButtonText}>x</Text>
+            </TouchableOpacity>
             <Text style={styles.headerText}>{name}</Text>
             <Text style={styles.header2Text}>{`${address} ${postalCode} ${city}`}</Text>
             <Text style={styles.header2Text}>Choose Charging Type:</Text>
@@ -27,28 +37,30 @@ const styles = StyleSheet.create({
         height: "55%",
         borderRadius: 50,
     },
-    placename: {
-        flex: 1,
-        backgroundColor: '#FDF6E9',
-        justifyContent: 'center',
+    closeButton: {
+        position: "absolute",
+        borderRadius: 20,
+        top: 10,
+        right: 30,
+        padding: 10,
     },
-    address: {
-        top: 260,
-        fontSize: 20,
-        zIndex: 110,
+    closeButtonText: {
+        fontSize: 35,
+        fontWeight: "bold",
+        color: "black",
     },
     headerText: {
         zIndex: 110,
         fontSize: 35,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         marginBottom: 1,
         marginLeft: 30,
-        marginTop: 450,
+        marginTop: 60,
     },
     header2Text: {
         zIndex: 110,
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         marginLeft: 30,
         marginBottom: 30,
     },

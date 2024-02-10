@@ -18,7 +18,7 @@ export default function PlugLocation({ name, address, postalCode, city }) {
 const styles = StyleSheet.create({
     innerContainer: {
         zIndex: 110,
-        top: 40,
+        top: -10.5,
         width: 430,
         backgroundColor: "white",
         flexDirection: 'row',

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View, ScrollView, FlatList } from "react-native";
+import { StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import BackButton from "../Components/BackButton";
 import PlugLocation from "../Components/PlugLocation";
 
@@ -8,9 +9,16 @@ export default function SearchPage() {
     const [search, setSearch] = useState("");
     const [filteredLocations, setFilteredLocations] = useState([]);
 
+    const navigation = useNavigation();
+
     useEffect(() => {
         fetch("http://localhost:3000/sijainnit")
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => setLocations(data))
             .catch(error => console.error("Failed to fetch location data:", error));
     }, []);
@@ -18,16 +26,16 @@ export default function SearchPage() {
     const handleSearch = (text) => {
         setSearch(text);
         const filtered = locations.filter(loc =>
-            loc.nimi.toLowerCase().includes(text.toLowerCase()) // Corrected the return statement in filter
+            loc.nimi.toLowerCase().includes(text.toLowerCase())
         );
         setFilteredLocations(filtered);
     };
 
     return (
-        <View style={styles.containers}>
+        <View style={styles.container}>
             <BackButton />
             <ScrollView style={styles.scrollContainer}>
-                <View style={styles.container}>
+                <View style={styles.innerContainer}>
                     <Text style={styles.text}>Charging Stations</Text>
                     <TextInput
                         autoFocus={true}
@@ -43,6 +51,7 @@ export default function SearchPage() {
                             address={loc.osoite}
                             postalCode={loc.postinumero}
                             city={loc.kaupunki}
+                            onPress={() => navigateToMap()} // Add onPress to navigate to MapComponent
                         />
                     ))}
                 </View>
@@ -52,7 +61,7 @@ export default function SearchPage() {
 }
 
 const styles = StyleSheet.create({
-    containers: {
+    container: {
         flex: 1,
         backgroundColor: "#FDF6E9",
         alignItems: "center",
@@ -61,8 +70,8 @@ const styles = StyleSheet.create({
     scrollContainer: {
         width: "100%",
     },
-    container: {
-        marginTop: 40,
+    innerContainer: {
+        marginTop: 120,
         width: "100%",
         borderRadius: 40,
         alignItems: 'center',
@@ -81,5 +90,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: "black",
         borderWidth: 1,
+        marginBottom: 80,
     },
 });

@@ -2,8 +2,6 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 import BackButton from "./BackButton";
 import React, { useState } from 'react';
 
-
-
 export default function CodeConfirm() {
     const [verificationCode, setVerificationCode] = useState('');
 
@@ -21,9 +19,8 @@ export default function CodeConfirm() {
 
     return (
         <View style={styles.containers}>
+            <BackButton />
             <View style={styles.codeConfirm}>
-                <BackButton />
-
                 {/* Confirmation Text */}
                 <Text style={styles.confirmationText}>Confirmation</Text>
 

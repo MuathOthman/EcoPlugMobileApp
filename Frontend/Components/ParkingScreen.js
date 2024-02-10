@@ -66,10 +66,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDF6E9',
         justifyContent: 'center',
     },
-    backButton: {
-        marginLeft: 20,
-        marginBottom: 20,
-    },
     headerText: {
         fontSize: 35,
         fontWeight: 'bold',
