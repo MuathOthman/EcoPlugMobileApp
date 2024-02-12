@@ -7,7 +7,6 @@ function BackButton() {
     const navigation = useNavigation();
 
     const goBack = () => {
-        console.log("Going back");
         navigation.goBack();
     }
 
@@ -22,7 +21,8 @@ const styles = StyleSheet.create({
     backButton: {
         position: "absolute",
         top: 80,
-        left: 40
+        left: 40,
+        zIndex:10000
     }
 });
 

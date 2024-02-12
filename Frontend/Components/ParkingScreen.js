@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     cellText: {
         fontSize: 28,
         fontWeight: 'bold',
-        margin:0
+        margin:0,
+        color: 'green',
     },
 });
