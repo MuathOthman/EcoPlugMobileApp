@@ -2,12 +2,10 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
 
-export default function ParkingScreen() {
+export default function ParkingScreen({name, address, zipcode, city}) {
     return (
         <View style={styles.container}>
                 <BackButton />
-            <Text style={styles.headerText}>Sellon Parkki</Text>
-            <Text style={styles.header2Text}>Hevosenkenkä 4, 02600 Espoo</Text>
             <Text style={styles.subText}>CHOOSE AVAILABLE PARKING</Text>
             <View style={styles.tableContainer}>
                 {[...Array(8)].map((_, rowIndex) => (
@@ -66,22 +64,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDF6E9',
         justifyContent: 'center',
     },
-    headerText: {
-        fontSize: 35,
-        fontWeight: 'bold',
-        marginBottom: 1,
-        marginLeft: 20,
-        marginTop: 20,
-    },
-    header2Text: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginLeft: 20,
-        marginBottom: 30,
-    },
     subText: {
         textAlign: "center",
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: "bold",
         marginBottom: 5,
     },

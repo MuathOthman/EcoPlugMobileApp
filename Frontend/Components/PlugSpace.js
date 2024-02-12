@@ -6,6 +6,7 @@ export default function PlugSpace() {
     return (
         <View style={styles.innerContainer}>
             <Icon name="charging-station" size={45} color="black" />
+            <Text style={styles.header}>8</Text>
         </View>
     );
 }
@@ -13,6 +14,7 @@ export default function PlugSpace() {
 // Define your styles here
 const styles = StyleSheet.create({
     innerContainer: {
+        marginLeft: 142,
         zIndex: 110,
         top: -10.5,
         width: 430,
@@ -20,8 +22,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 20,
-        borderWidth: 0.5,
-        borderColor: 'black',
     },
     textContainer: {
         zIndex: 110,
@@ -29,10 +29,11 @@ const styles = StyleSheet.create({
     },
     header: {
         zIndex: 110,
-        fontSize: 22,
+        fontSize: 51,
         fontWeight: 'bold',
         marginLeft: 20,
         marginBottom: 1,
+        color: 'green',
     },
     smallText: {
         zIndex: 110,

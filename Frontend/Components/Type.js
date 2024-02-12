@@ -2,8 +2,15 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import PlugLocation from "./PlugLocation";
 import PlugSpace from "./PlugSpace";
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 
-export default function Type({ name, address, postalCode, city, setIsVisible }) {
+export default function Type({name, address, postalCode, city, setIsVisible }) {
+    const navigation = useNavigation(); // Use useNavigation hook
+
+    const handleButtonPress = () => {
+        navigation.navigate("ParkingScreen"); // Navigate to ParkingScreen
+    }
+
     const handleClose = () => {
         setIsVisible(false);
         console.log("Closed");
@@ -19,8 +26,11 @@ export default function Type({ name, address, postalCode, city, setIsVisible }) 
             </TouchableOpacity>
             <Text style={styles.headerText}>{name}</Text>
             <Text style={styles.header2Text}>{`${address} ${postalCode} ${city}`}</Text>
-            <Text style={styles.header2Text}>Choose Charging Type:</Text>
+            <Text style={styles.header3Text}>Available Charging Stations</Text>
             <PlugSpace />
+            <TouchableOpacity style={styles.StopChargingButton} onPress={handleButtonPress}>
+                <Text style={styles.buttonText}>CONTINUE</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -52,7 +62,7 @@ const styles = StyleSheet.create({
         zIndex: 110,
         fontSize: 35,
         fontWeight: "bold",
-        marginBottom: 1,
+        marginBottom: 5,
         marginLeft: 30,
         marginTop: 60,
     },
@@ -61,6 +71,27 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         marginLeft: 30,
-        marginBottom: 30,
+        marginBottom: 60,
     },
+    header3Text: {
+        zIndex: 110,
+        fontSize: 28,
+        fontWeight: "bold",
+        marginLeft: 30,
+        marginBottom: 20,
+    },
+    StopChargingButton: {
+        backgroundColor: 'black',
+        padding: 17,
+        borderRadius: 40,
+        alignItems: 'center',
+        marginLeft: 40,
+        marginTop: 25,
+        marginBottom: 210,
+        width: 350,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 25,
+    }
 });
