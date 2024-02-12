@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import PlugLocation from "./PlugLocation";
+import PlugSpace from "./PlugSpace";
 
 export default function Type({ name, address, postalCode, city, setIsVisible }) {
     const handleClose = () => {
@@ -19,9 +20,7 @@ export default function Type({ name, address, postalCode, city, setIsVisible }) 
             <Text style={styles.headerText}>{name}</Text>
             <Text style={styles.header2Text}>{`${address} ${postalCode} ${city}`}</Text>
             <Text style={styles.header2Text}>Choose Charging Type:</Text>
-            <PlugLocation name="Type 2" address="AC 22kW" postalCode="2" city="Espoo" />
-            <PlugLocation name="Type 2" address="DC 50kW" postalCode="2" city="Espoo" />
-            <PlugLocation name="Type 2" address="DC 150kW" postalCode="2" city="Espoo" />
+            <PlugSpace />
         </View>
     );
 }

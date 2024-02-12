@@ -3,57 +3,47 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+const iconData = [
+    { name: "home-outline" },
+    { name: "car-sport-outline" },
+    { name: "settings-outline" },
+    { name: "person-outline" },
+];
+
+const screenMapping = {
+    "home-outline": "Map",
+    "car-sport-outline": "Availability",
+    "settings-outline": "ParkingScreen",
+    "person-outline": "Reservation",
+};
+
 export default function Navbar() {
     const navigation = useNavigation();
     const [activeIcon, setActiveIcon] = useState(0);
 
     const handleIconPress = (index) => {
         setActiveIcon(index);
+        const { name } = iconData[index];
+        const screen = screenMapping[name];
 
-        switch (index) {
-            case 0:
-                navigation.navigate("Home");
-                break;
-            case 1:
-                navigation.navigate("CarSport");
-                break;
-            case 2:
-                navigation.navigate("Reservation");
-                break;
-            case 3:
-                navigation.navigate("Availability");
-                break;
-            default:
-                break;
+        if (screen) {
+            navigation.navigate(screen);
+        } else {
+            console.warn(`Screen not mapped for icon name: ${name}`);
         }
     };
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={[styles.iconContainer, activeIcon === 0 && styles.activeIcon]}
-                onPress={() => handleIconPress(0)}
-            >
-                <Ionicons name="home-outline" size={25} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={[styles.iconContainer, activeIcon === 1 && styles.activeIcon]}
-                onPress={() => handleIconPress(1)}
-            >
-                <Ionicons name="car-sport-outline" size={25} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={[styles.iconContainer, activeIcon === 2 && styles.activeIcon]}
-                onPress={() => handleIconPress(2)}
-            >
-                <Ionicons name="settings-outline" size={25} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={[styles.iconContainer, activeIcon === 3 && styles.activeIcon]}
-                onPress={() => handleIconPress(3)}
-            >
-                <Ionicons name="person-outline" size={25} color="black" />
-            </TouchableOpacity>
+            {iconData.map((icon, index) => (
+                <TouchableOpacity
+                    key={index}
+                    style={[styles.iconContainer, activeIcon === index && styles.activeIcon]}
+                    onPress={() => handleIconPress(index)}
+                >
+                    <Ionicons name={icon.name} size={25} color="black" />
+                </TouchableOpacity>
+            ))}
         </View>
     );
 }

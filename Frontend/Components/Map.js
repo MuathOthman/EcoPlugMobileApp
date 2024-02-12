@@ -3,6 +3,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 import Type from "./Type";
+import Navbar from "./Navbar";
 
 export default function Map() {
     const mapRef = useRef(null);
@@ -78,8 +79,10 @@ export default function Map() {
                             resizeMode="contain"
                         />
                     </Marker>
+
                 ))}
             </MapView>
+
             {selectedLocation && isTypeVisible && (
                 <Type
                     name={selectedLocation.nimi}
@@ -89,6 +92,7 @@ export default function Map() {
                     setIsVisible={setIsTypeVisible} // Pass setIsVisible to Type component
                 />
             )}
+            <Navbar />
         </View>
     );
 }
@@ -96,7 +100,6 @@ export default function Map() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        zIndex: 1,
     },
     map: {
         flex: 1,

@@ -1,57 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import WelcomePage from "./Pages/WelcomePage";
-import SearchPage from "./Pages/SearchPage";
-import Map from "./Components/Map";
-import Navbar from "./Components/Navbar";
-import CodeConfirm from "./Components/CodeConfirm";
-import Availability from "./Components/Availability";
-import ParkingScreen from "./Components/ParkingScreen";
+// App.js (or your main entry point)
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MapScreen from './Components/Map'; // Replace with your actual screen components
+import AvailabilityScreen from './Pages/SearchPage'; // Replace with your actual screen components
+import ParkingScreen from './Components/ParkingScreen'; // Replace with your actual screen components
+import ReservationScreen from './Components/Reservation'; // Replace with your actual screen components
+import Navbar from './Components/Navbar';
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-export default function App() {
-    const [showWelcome, setShowWelcome] = useState(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowWelcome(false);
-        }, 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
+const App = () => {
     return (
-            <NavigationContainer>
-                {showWelcome ? (
-                    <WelcomePage />
-                ) : (
-                    <Tab.Navigator tabBar={(props) => <Navbar {...props} />}>
-                        <Tab.Screen
-                            name="Home"
-                            component={Map}
-                            options={{ tabBarLabel: '', headerShown: false }}
-                        />
-                        <Tab.Screen
-                            name="CarSport"
-                            component={SearchPage}
-                            options={{ tabBarLabel: '', headerShown: false }}
-                        />
-                        <Tab.Screen
-                            name="Reservation"
-                            component={CodeConfirm}
-                            options={{ tabBarLabel: '', headerShown: false }}
-                        />
-                        <Tab.Screen
-                            name="Availability"
-                            component={ParkingScreen}
-                            options={{ tabBarLabel: '', headerShown: false}}
-                        />
-                    </Tab.Navigator>
-                )}
-            </NavigationContainer>
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Map">
+                <Stack.Screen name="Map" component={MapScreen} options={{ tabBarLabel: '', headerShown: false }}
+                />
+                <Stack.Screen name="Availability" component={AvailabilityScreen} options={{ tabBarLabel: '', headerShown: false }}
+                />
+                <Stack.Screen name="ParkingScreen" component={ParkingScreen} options={{ tabBarLabel: '', headerShown: false }}
+                />
+                <Stack.Screen name="Reservation" component={ReservationScreen}  options={{ tabBarLabel: '', headerShown: false }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
-}
+};
 
-
+export default App;

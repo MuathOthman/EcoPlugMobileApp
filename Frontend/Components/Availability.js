@@ -5,9 +5,7 @@ import BackButton from "./BackButton";
 export default function Availability() {
     return (
         <View style={styles.container}>
-            <View style={styles.backButton}>
-                <BackButton />
-            </View>
+            <BackButton />
             <Text style={styles.text}>CHARGING</Text>
             <View style={styles.whiteBox}>
                 <Text style={styles.nameText}>Volkswagen</Text>
@@ -148,10 +146,6 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         marginTop: 15,
         marginLeft: 25,
-    },
-    backButton: {
-        marginRight: 320,
-        marginBottom: 30
     },
     StopChargingButton: {
         backgroundColor: 'black',
