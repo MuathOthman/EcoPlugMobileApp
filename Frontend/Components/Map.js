@@ -86,6 +86,7 @@ export default function Map() {
 
             {selectedLocation && isTypeVisible && (
                 <Type
+                    id={selectedLocation.sijainti_ID}
                     name={selectedLocation.nimi}
                     address={selectedLocation.osoite}
                     city={selectedLocation.kaupunki}
