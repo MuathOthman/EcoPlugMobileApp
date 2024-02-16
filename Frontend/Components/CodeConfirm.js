@@ -1,9 +1,12 @@
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
 import React, { useState } from 'react';
+import {useNavigation} from "@react-navigation/native";
 
 export default function CodeConfirm() {
+    const navigator = useNavigation();
     const [verificationCode, setVerificationCode] = useState('');
+    const phoneNumber = "+358442379461";
 
     const handleCodeChange = (index, value) => {
         if (/^\d+$/.test(value) || value === '') {
@@ -15,6 +18,24 @@ export default function CodeConfirm() {
     const handleContinuePress = () => {
         // You can add your logic here for what should happen when the continue button is pressed
         console.log('Verification Code:', verificationCode);
+        fetch('http://localhost:3000/otp/verify-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "otp": verificationCode, phoneNumber}),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                if (data.message === "approved") {
+                    navigator.navigate('Charging');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+
+        })
     };
 
     return (

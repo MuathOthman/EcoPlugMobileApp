@@ -1,38 +1,47 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
+import {useNavigation} from "@react-navigation/native";
 
 export default function Reservation() {
+    const navigator = useNavigation();
     const [phoneNumber, setPhoneNumber] = useState('');
 
     const handlePhoneNumberChange = (value) => {
-        // You can add additional validation if needed
         setPhoneNumber(value);
     };
 
     const handleContinuePress = () => {
-        // You can add your logic here for what should happen when the continue button is pressed
         console.log('Phone Number:', phoneNumber);
+        fetch('http://localhost:3000/otp/send-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ phoneNumber }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+        })
+        navigator.navigate('Verify');
     };
 
     return (
         <View style={styles.containers}>
             <BackButton />
             <View style={styles.reservation}>
-                {/* Confirmation Text */}
                 <Text style={styles.confirmationText}>Confirmation</Text>
-                {/* Main Header */}
                 <Text style={styles.headerText}>Sellon Parkki</Text>
-                {/* Header */}
                 <View style={styles.header}>
-                    {/* Additional Text Elements */}
                     <Text style={styles.additionalText}>Address: 123 Main St</Text>
                     <Text style={styles.additionalText}>1234</Text>
                 </View>
 
-                {/* Container for phone number input */}
                 <View style={styles.container}>
-                    {/* Phone Number Input */}
                     <TextInput
                         style={styles.field}
                         placeholder="Enter your phone number (+358)"
@@ -41,7 +50,6 @@ export default function Reservation() {
                         onChangeText={handlePhoneNumberChange}
                     />
 
-                    {/* Continue Button */}
                     <TouchableOpacity
                         style={styles.continueButton}
                         onPress={handleContinuePress}

@@ -6,7 +6,8 @@ import MapScreen from './Components/Map'; // Replace with your actual screen com
 import AvailabilityScreen from './Pages/SearchPage'; // Replace with your actual screen components
 import ParkingScreen from './Components/ParkingScreen'; // Replace with your actual screen components
 import ReservationScreen from './Components/Reservation'; // Replace with your actual screen components
-import Navbar from './Components/Navbar';
+import CodeConfirm from "./Components/CodeConfirm";
+import Availability from "./Components/Availability";
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,10 @@ const App = () => {
                 <Stack.Screen name="ParkingScreen" component={ParkingScreen} options={{ tabBarLabel: '', headerShown: false }}
                 />
                 <Stack.Screen name="Reservation" component={ReservationScreen}  options={{ tabBarLabel: '', headerShown: false }}
+                />
+                <Stack.Screen name={"Verify"} component={CodeConfirm} options={{ tabBarLabel: '', headerShown: false }}
+                />
+                <Stack.Screen name={"Charging"} component={Availability} options={{ tabBarLabel: '', headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
