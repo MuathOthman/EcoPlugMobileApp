@@ -22,7 +22,7 @@ export default function Type({id, name, address, postalCode, city, setIsVisible 
     fetchFreeCount();
     const handleButtonPress = () => {
         setIsVisible(false);
-        navigation.navigate('');
+        navigation.navigate('ParkingScreen');
     }
     const handleClose = () => {
         setIsVisible(false);

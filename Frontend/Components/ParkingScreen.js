@@ -34,13 +34,13 @@ export default function ParkingScreen({name, address, zipcode, city}) {
 const getCellText = (rowIndex, colIndex) => {
     const cellTexts = [
         ['', ''],
-        ['     A502','B509     '],
-        ['     A503','B510     '],
-        ['     A504','B511     '],
-        ['     A505','B512     '],
-        ['     A506','B513     '],
-        ['     A507','B514     '],
-        ['     A508','B515     '],
+        [`     ${"A502"}`,'B509     '],
+        [`     ${"A502"}`,'B510     '],
+        [`     ${"A502"}`,'B511     '],
+        [`     ${"A502"}`,'B512     '],
+        [`     ${"A502"}`,'B513     '],
+        [`     ${"A502"}`,'B514     '],
+        [`     ${"A502"}`,'B515     '],
     ];
     return cellTexts[rowIndex][colIndex];
 };
