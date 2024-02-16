@@ -60,6 +60,7 @@ export default function Map() {
     return (
         <View style={styles.container}>
             <MapView
+                maxZoomLevel={10}
                 provider={PROVIDER_GOOGLE}
                 ref={mapRef}
                 mapType={'satellite'}

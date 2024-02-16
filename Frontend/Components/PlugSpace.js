@@ -1,12 +1,32 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-export default function PlugSpace() {
+export default function PlugSpace({ selectedLocation }) {
+    const [freeCount, setFreeCount] = useState(0);
+
+    useEffect(() => {
+        const fetchFreeCount = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/sijainnit/${encodeURIComponent(selectedLocation.nimi)}`);
+                const data = await response.json();
+                const count = data[3];
+                console.log(selectedLocation.nimi)
+                setFreeCount(count);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        if (selectedLocation) {
+            fetchFreeCount();
+        }
+    }, [selectedLocation]);
+
     return (
         <View style={styles.innerContainer}>
             <Icon name="charging-station" size={45} color="black" />
-            <Text style={styles.header}>8</Text>
+            <Text style={styles.header}>{freeCount}</Text>
         </View>
     );
 }

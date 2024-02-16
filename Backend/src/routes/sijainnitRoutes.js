@@ -7,5 +7,6 @@ const SijainnitController = require('../controllers/sijainnitController');
 
 
 router.get('/', SijainnitController.findAll);
+router.get('/:id', SijainnitController.findOne);
 
 module.exports = router;
