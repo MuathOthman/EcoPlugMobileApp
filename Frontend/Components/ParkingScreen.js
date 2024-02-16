@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
 
-export default function ParkingScreen({name, address, zipcode, city}) {
+export default function ParkingScreen({id, name, address, zipcode, city}) {
+    const [parkings, setParkings] = useState(0);
+    const fetchFreeCount = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/sijainnit/parkings/${id}`);
+            const data = await response.json();
+            setParkings(data);
+        }
+        catch (error) {
+            console.error("Failed to fetch free count:", error);
+        }
+    }
+
+    fetchFreeCount();
     return (
         <View style={styles.container}>
                 <BackButton />
