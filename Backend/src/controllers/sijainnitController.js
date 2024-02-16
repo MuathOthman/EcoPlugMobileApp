@@ -14,11 +14,8 @@ const findAll = (req, res) => {
 };
 
 const findOne = (req, res) => {
-    const name = req.params.name;
-
-    connection.query(
-        'SELECT COUNT(*) AS count FROM Latauspiste L JOIN sijaitsee S ON L.latauspisteID = S.latauspisteID JOIN Sijainti SI ON S.sijainti_ID = SI.sijainti_ID WHERE SI.nimi = ? AND L.tila = 0;',
-        [name],
+    const name = req.params.id;
+    connection.query('SELECT COUNT(*) AS count FROM Latauspiste L JOIN sijaitsee S ON L.latauspisteID = S.latauspisteID JOIN Sijainti SI ON S.sijainti_ID = SI.sijainti_ID WHERE SI.sijainti_ID = ? AND L.tila = 0;', [name],
         (err, rows) => {
             if (err) {
                 console.log([name])
