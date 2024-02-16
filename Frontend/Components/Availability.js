@@ -152,13 +152,11 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 40,
         alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 210,
+        marginTop: 14,
         width: 350,
     },
     buttonText: {
         color: 'white',
         fontSize: 25,
-    }
-
+    },
 });

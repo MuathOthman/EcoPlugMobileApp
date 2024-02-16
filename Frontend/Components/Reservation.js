@@ -65,11 +65,12 @@ export default function Reservation() {
 
 const styles = StyleSheet.create({
     confirmationText: {
-        fontSize: 20,
+
+        fontSize: 40,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 20,
         textAlign: 'center',
-        marginTop: 50,
+        marginTop: 130,
     },
     header: {
         marginBottom: 20,
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     headerText: {
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
@@ -93,34 +94,27 @@ const styles = StyleSheet.create({
         alignItems:"center",
     },
     field: {
+        position: 'absolute',
         padding: 20,
-        paddingLeft: 38,
-        paddingRight: 38,
-        marginBottom: 200,
+        width: 375,
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 20,
         fontSize: 18,
-        marginTop: 200,
+        top: 110,
         backgroundColor: 'white',
-
     },
-    continueButton: {
+    continueButton : {
         backgroundColor: 'black',
         padding: 20,
-        borderRadius: 20,
+        borderRadius: 40,
         alignItems: 'center',
-        marginTop: 90,
-        marginBottom: 120,
+        marginTop: 371,
+        width: 350,
     },
     buttonText: {
         color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold',
-
-    },
-    reservation: {
-        marginTop: 65,
+        fontSize: 25,
     },
     containers: {
         flex: 1,

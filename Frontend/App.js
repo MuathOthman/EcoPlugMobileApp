@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MapScreen from './Components/Map'; // Replace with your actual screen components
 import AvailabilityScreen from './Pages/SearchPage'; // Replace with your actual screen components
-import ParkingScreen from './Components/ParkingScreen'; // Replace with your actual screen components
+import ParkingScreen from './Components/CodeConfirm'; // Replace with your actual screen components
 import ReservationScreen from './Components/Reservation'; // Replace with your actual screen components
 import CodeConfirm from "./Components/CodeConfirm";
 import Availability from "./Components/Availability";

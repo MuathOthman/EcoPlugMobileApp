@@ -54,13 +54,13 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     closeButtonText: {
-        fontSize: 35,
+        fontSize: 33,
         fontWeight: "bold",
         color: "black",
     },
     headerText: {
         zIndex: 110,
-        fontSize: 35,
+        fontSize: 33,
         fontWeight: "bold",
         marginBottom: 5,
         marginLeft: 30,
@@ -86,8 +86,7 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         alignItems: 'center',
         marginLeft: 40,
-        marginTop: 25,
-        marginBottom: 210,
+        marginTop: 17,
         width: 350,
     },
     buttonText: {

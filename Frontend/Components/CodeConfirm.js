@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     confirmationText: {
-        fontSize: 20,
+        fontSize: 40,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 20,
         textAlign: 'center',
-        marginTop: 50,
+        marginTop: 55,
     },
     header: {
         marginBottom: 20,
@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
     },
     chargeId: {
         fontSize: 20,
-        marginBottom: 5,
+        marginTop: 10,
         textAlign: 'center',
         fontWeight: 'bold',
         color: 'green',
     },
     headerText: {
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
@@ -128,8 +128,7 @@ const styles = StyleSheet.create({
     verificationText: {
         fontSize: 16,
         textAlign: 'center',
-        marginTop: 100,
-
+        marginTop: 80,
     },
     phoneNumber: {
         fontSize: 18,
@@ -151,7 +150,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
         textAlign: 'center',
         fontSize: 30,
-        marginTop: -10,
         marginBottom: 200,
         backgroundColor: 'white',
 
@@ -159,18 +157,14 @@ const styles = StyleSheet.create({
     continueButton: {
         backgroundColor: 'black',
         padding: 20,
-        borderRadius: 20,
+        borderRadius: 40,
         alignItems: 'center',
-        marginTop: 15,
-        marginBottom: 210,
+        marginTop: -1,
+        width: 350,
     },
     buttonText: {
         color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    codeConfirm: {
-        marginTop: 240,
+        fontSize: 25,
     },
     container: {
         flex: 1,
