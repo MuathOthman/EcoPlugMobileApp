@@ -4,10 +4,7 @@ pipeline {
             nodejs "NodeJS"
 
         }
-    environment {
-        // Define your environment variables here. For example, the Node version.
-        NODE_VERSION = '21'
-    }
+
 
     stages {
         stage('Checkout') {
@@ -17,16 +14,6 @@ pipeline {
             }
         }
 
-        stage('Setup') {
-            steps {
-                // Use a tool defined in Jenkins or a script to set up your Node.js environment
-                script {
-                    // This example uses 'npm' (Node Version Manager) to set the Node version
-                    sh 'npm install $NODE_VERSION'
-                    sh 'npm use $NODE_VERSION'
-                }
-            }
-        }
 
         stage('Install') {
             steps {
