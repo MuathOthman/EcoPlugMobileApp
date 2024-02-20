@@ -6,7 +6,7 @@ pipeline {
         }
     environment {
         // Define your environment variables here. For example, the Node version.
-        NODE_VERSION = 'NodeJS'
+        NODE_VERSION = '21.6.2'
     }
 
     stages {
