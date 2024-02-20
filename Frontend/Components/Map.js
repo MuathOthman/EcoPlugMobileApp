@@ -4,6 +4,8 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 import Type from "./Type";
 import Navbar from "./Navbar";
+import ParkingScreen from "./ParkingScreen";
+import { useNavigation } from '@react-navigation/native';
 
 export default function Map() {
     const mapRef = useRef(null);
@@ -15,13 +17,12 @@ export default function Map() {
         latitudeDelta: 0.0592,
         longitudeDelta: 0.0021,
     });
-    const [isTypeVisible, setIsTypeVisible] = useState(true); // New state for Type visibility
+    const [isTypeVisible, setIsTypeVisible] = useState(true);
+    const navigation = useNavigation();
 
     const pressHandler = (loc) => {
-        console.log("Marker pressed");
-        console.log(loc);
         setSelectedLocation(loc);
-        setIsTypeVisible(true); // Set Type visibility to true when a marker is pressed
+        setIsTypeVisible(true);
         const newRegion = {
             latitude: loc.latitude - 0.0005,
             longitude: loc.longitude,
@@ -34,9 +35,7 @@ export default function Map() {
     useEffect(() => {
         fetch("http://localhost:3000/sijainnit")
             .then(response => response.json())
-            .then(data => {
-                setLocations(data);
-            })
+            .then(data => setLocations(data))
             .catch(error => console.error("Failed to fetch location data:", error));
     }, []);
 
@@ -80,7 +79,6 @@ export default function Map() {
                             resizeMode="contain"
                         />
                     </Marker>
-
                 ))}
             </MapView>
 
@@ -91,7 +89,8 @@ export default function Map() {
                     address={selectedLocation.osoite}
                     city={selectedLocation.kaupunki}
                     postalCode={selectedLocation.postinumero}
-                    setIsVisible={setIsTypeVisible} // Pass setIsVisible to Type component
+                    setIsVisible={setIsTypeVisible}
+                    navigation={navigation}
                 />
             )}
             <Navbar />

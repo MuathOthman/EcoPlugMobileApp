@@ -1,36 +1,37 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import PlugSpace from "./PlugSpace";
 import { useNavigation } from '@react-navigation/native';
-import Icon from "react-native-vector-icons/FontAwesome6"; // Import useNavigation hook
+import Icon from "react-native-vector-icons/FontAwesome6";
 
-export default function Type({id, name, address, postalCode, city, setIsVisible }) {
+export default function Type({ id, name, address, postalCode, city, setIsVisible }) {
     const navigation = useNavigation();
     const [freeCount, setFreeCount] = useState(0);
 
-    const fetchFreeCount = async () => {
-        try {
-            const response = await fetch(`http://localhost:3000/sijainnit/specific/${id}`);
-            const data = await response.json();
-            setFreeCount(data[0].count);
-        }
-        catch (error) {
-            console.error("Failed to fetch free count:", error);
-        }
-    }
+    useEffect(() => {
+        const fetchFreeCount = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/sijainnit/specific/${id}`);
+                const data = await response.json();
+                setFreeCount(data[0].count);
+            } catch (error) {
+                console.error("Failed to fetch free count:", error);
+            }
+        };
 
-    fetchFreeCount();
+        fetchFreeCount();
+    }, [id]);
+
     const handleButtonPress = () => {
         setIsVisible(false);
-        navigation.navigate('ParkingScreen');
-    }
+        navigation.navigate('ParkingScreen', { id });
+    };
+
     const handleClose = () => {
         setIsVisible(false);
         console.log("Closed");
     };
 
     const countTextColor = freeCount <= 5 ? 'red' : 'green';
-
 
     return (
         <View style={styles.container}>
@@ -45,7 +46,7 @@ export default function Type({id, name, address, postalCode, city, setIsVisible 
             <Text style={styles.header3Text}>Available Charging Stations</Text>
             <View style={styles.innerContainer}>
                 <Icon name="charging-station" size={45} color="black" />
-                <Text style={[styles.countnumber, {color: countTextColor}]}>{freeCount}</Text>
+                <Text style={[styles.countnumber, { color: countTextColor }]}>{freeCount}</Text>
             </View>
             <TouchableOpacity style={styles.StopChargingButton} onPress={handleButtonPress}>
                 <Text style={styles.buttonText}>CONTINUE</Text>
@@ -129,5 +130,4 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginBottom: 1,
     },
-
 });

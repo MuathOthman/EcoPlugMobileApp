@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import BackButton from "./BackButton";
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import BackButton from './BackButton';
+import { useRoute } from '@react-navigation/native';  // Import useRoute hook
 
-export default function ParkingScreen({ id }) {
+export default function ParkingScreen() {
+    const route = useRoute();  // Use useRoute hook to get route object
+    const { id } = route.params;  // Extract id from route parameters
     const [parkings, setParkings] = useState([]);
 
     useEffect(() => {
@@ -21,10 +24,23 @@ export default function ParkingScreen({ id }) {
     }, [id]);
 
     const getCellText = (rowIndex, colIndex) => {
-        if (parkings[rowIndex] && parkings[rowIndex][colIndex]) {
-            return parkings[rowIndex][colIndex].parkki + ' ' + parkings[rowIndex][colIndex].tila;
+        const parkingIndex = rowIndex * 2 + colIndex;
+        const parking = parkings[parkingIndex];
+
+        if (parking) {
+            const textColor = parking.tila === 0 ? 'green' : 'red';
+            const parkingTypeLabel = colIndex === 0 ? 'Type 2' : 'CCS';
+            return (
+                <View style={styles.cellContainer}>
+                    <Text style={styles.cellTypeText}>{parkingTypeLabel}</Text>
+                    <Text style={[styles.cellText, { color: textColor }]}>
+                        {parking.parkki}
+                    </Text>
+                </View>
+            );
         }
-        return '';
+
+        return null;
     };
 
     return (
@@ -32,19 +48,15 @@ export default function ParkingScreen({ id }) {
             <BackButton />
             <Text style={styles.subText}>CHOOSE AVAILABLE PARKING</Text>
             <View style={styles.tableContainer}>
-                {[...Array(8)].map((_, rowIndex) => (
+                {[...Array(9)].map((_, rowIndex) => (
                     <React.Fragment key={rowIndex}>
                         <View style={styles.tableRow}>
                             <View style={styles.columnItem}>
-                                <Text style={[styles.cellText]}>
-                                    {getCellText(rowIndex, 0)}
-                                </Text>
+                                {getCellText(rowIndex, 0)}
                             </View>
                             <View style={styles.columnSeparator}/>
                             <View style={styles.columnItem}>
-                                <Text style={[styles.cellText]}>
-                                    {getCellText(rowIndex, 1)}
-                                </Text>
+                                {getCellText(rowIndex, 1)}
                             </View>
                         </View>
                         {rowIndex < 7 && <View style={styles.rowSeparator} />}
@@ -65,7 +77,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 25,
         fontWeight: "bold",
-        marginBottom: 5,
+        marginTop: 60,
     },
     tableContainer: {
         flexDirection: 'column',
@@ -80,10 +92,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 10,
+        paddingVertical: 7,
     },
     columnSeparator: {
-        height: '200%',
+        height: '100%',
         width: 4,
         backgroundColor: 'black',
     },
@@ -93,10 +105,17 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         marginVertical: 5,
     },
+    cellContainer: {
+        alignItems: 'center',
+    },
+    cellTypeText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 3,
+    },
     cellText: {
         fontSize: 28,
         fontWeight: 'bold',
         margin: 0,
-        color: 'green',
     },
 });
