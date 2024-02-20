@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function Reservation() {
     const navigator = useNavigation();
+    const route = useRoute();
+    const { park, lable, name } = route.params;
     const [phoneNumber, setPhoneNumber] = useState('');
 
     const handlePhoneNumberChange = (value) => {
@@ -26,7 +28,7 @@ export default function Reservation() {
             })
             .catch((error) => {
                 console.error('Error:', error);
-        })
+            })
         navigator.navigate('Verify');
     };
 
@@ -35,10 +37,10 @@ export default function Reservation() {
             <BackButton />
             <View style={styles.reservation}>
                 <Text style={styles.confirmationText}>Confirmation</Text>
-                <Text style={styles.headerText}>Sellon Parkki</Text>
+                <Text style={styles.headerText}>Sello</Text>
                 <View style={styles.header}>
-                    <Text style={styles.additionalText}>Address: 123 Main St</Text>
-                    <Text style={styles.additionalText}>1234</Text>
+                    <Text style={styles.additionalText1}>{lable}</Text>
+                    <Text style={styles.additionalText}>{park}</Text>
                 </View>
 
                 <View style={styles.container}>
@@ -63,6 +65,7 @@ export default function Reservation() {
     );
 }
 
+
 const styles = StyleSheet.create({
     confirmationText: {
 
@@ -76,9 +79,17 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         textAlign: 'center',
     },
+    additionalText1: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginBottom: 15,
+        textAlign: 'center',
+    },
     additionalText: {
-        fontSize: 16,
-        marginBottom: 5,
+        color: 'green',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 15,
         textAlign: 'center',
     },
     headerText: {
@@ -101,7 +112,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 20,
         fontSize: 18,
-        top: 110,
+        top: 90,
         backgroundColor: 'white',
     },
     continueButton : {

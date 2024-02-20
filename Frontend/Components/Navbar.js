@@ -13,7 +13,7 @@ const iconData = [
 const screenMapping = {
     "home-outline": "Map",
     "car-sport-outline": "SearchPage",
-    "settings-outline": "ParkingScreen",
+    "settings-outline": "Charging",
     "person-outline": "Reservation",
 };
 

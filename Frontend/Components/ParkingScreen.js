@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import BackButton from './BackButton';
-import { useRoute } from '@react-navigation/native';  // Import useRoute hook
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function ParkingScreen() {
-    const route = useRoute();  // Use useRoute hook to get route object
-    const { id } = route.params;  // Extract id from route parameters
+    const navigation = useNavigation();
+    const route = useRoute();
+    const { id } = route.params;
     const [parkings, setParkings] = useState([]);
 
     useEffect(() => {
@@ -30,13 +31,29 @@ export default function ParkingScreen() {
         if (parking) {
             const textColor = parking.tila === 0 ? 'green' : 'red';
             const parkingTypeLabel = colIndex === 0 ? 'Type 2' : 'CCS';
+
+            const handlePress = () => {
+                if (parking.tila !== 1) {
+                    navigation.navigate('Reservation', {
+                        park: parking.parkki,
+                        lable: parkingTypeLabel,
+                    });
+                }
+            };
+
             return (
-                <View style={styles.cellContainer}>
-                    <Text style={styles.cellTypeText}>{parkingTypeLabel}</Text>
-                    <Text style={[styles.cellText, { color: textColor }]}>
-                        {parking.parkki}
-                    </Text>
-                </View>
+                <TouchableOpacity
+                    onPress={handlePress}
+                    key={parkingIndex}
+                    disabled={parking.tila === 1}
+                >
+                    <View style={styles.cellContainer}>
+                        <Text style={styles.cellTypeText}>{parkingTypeLabel}</Text>
+                        <Text style={[styles.cellText, { color: textColor }]}>
+                            {parking.parkki}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             );
         }
 
