@@ -14,7 +14,7 @@ const screenMapping = {
     "home-outline": "Map",
     "car-sport-outline": "SearchPage",
     "settings-outline": "Charging",
-    "person-outline": "Reservation",
+    "person-outline": "Verify",
 };
 
 export default function Navbar() {

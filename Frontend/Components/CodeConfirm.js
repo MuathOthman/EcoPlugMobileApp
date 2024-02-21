@@ -1,10 +1,14 @@
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
-import React, { useState } from 'react';
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function CodeConfirm() {
+    const route = useRoute();
     const navigator = useNavigation();
+
+    // Destructure params after defining route
+    const { park, lable, name, id } = route.params;
     const [verificationCode, setVerificationCode] = useState('');
     const phoneNumber = "+358442379461";
 
@@ -15,55 +19,27 @@ export default function CodeConfirm() {
             setVerificationCode(newCode.join(''));
         }
     };
-    const handleContinuePress = () => {
-        // You can add your logic here for what should happen when the continue button is pressed
-        console.log('Verification Code:', verificationCode);
-        fetch('http://localhost:3000/otp/verify-otp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ "otp": verificationCode, phoneNumber}),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
-                if (data.message === "approved") {
-                    navigator.navigate('Charging');
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
 
-        })
+    const handleContinuePress = () => {
+        navigator.navigate('Charging', {
+            park,
+            lable,
+            id,
+        });
     };
 
     return (
         <View style={styles.containers}>
             <BackButton />
             <View style={styles.codeConfirm}>
-                {/* Confirmation Text */}
                 <Text style={styles.confirmationText}>Confirmation</Text>
-
-                {/* Main Header */}
-                <Text style={styles.headerText}>Sellon Parkki</Text>
-
-                {/* Header */}
+                <Text style={styles.headerText}>{name}</Text>
                 <View style={styles.header}>
-                    {/* Additional Text Elements */}
-                    <Text style={styles.additionalText}>Myllypurontie 5 C</Text>
-                    <Text style={styles.additionalText}>1234</Text>
-                    <Text style={styles.chargeId}>ABCD</Text>
-
+                    <Text style={styles.additionalText1}>{lable}</Text>
+                    <Text style={styles.additionalText}>{park}</Text>
                 </View>
-
-                {/* Verification Text */}
                 <Text style={styles.verificationText}>Verification code was sent to</Text>
-
-                {/* Phone Number Display */}
                 <Text style={styles.phoneNumber}>+358 123456789</Text>
-
-                {/* Code Input */}
                 <View style={styles.codeInputContainer}>
                     {[0, 1, 2, 3].map((index) => (
                         <TextInput
@@ -88,7 +64,6 @@ export default function CodeConfirm() {
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     containers: {
         flex: 1,
@@ -108,16 +83,17 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     additionalText: {
-        fontSize: 16,
-        marginBottom: 5,
+        color: 'green',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 20,
         textAlign: 'center',
     },
-    chargeId: {
-        fontSize: 20,
-        marginTop: 10,
-        textAlign: 'center',
+    additionalText1: {
+        fontSize: 25,
         fontWeight: 'bold',
-        color: 'green',
+        marginBottom: 20,
+        textAlign: 'center',
     },
     headerText: {
         fontSize: 30,

@@ -7,7 +7,7 @@ import SearchPage from './Pages/SearchPage'; // Replace with your actual screen 
 import ParkingScreen from './Components/ParkingScreen'; // Replace with your actual screen components
 import ReservationScreen from './Components/Reservation'; // Replace with your actual screen components
 import CodeConfirm from "./Components/CodeConfirm";
-import Availability from "./Components/Availability";
+import Charging from "./Components/Charging";
 
 
 const Stack = createStackNavigator();
@@ -26,7 +26,7 @@ const App = () => {
                 />
                 <Stack.Screen name={"Verify"} component={CodeConfirm} options={{ tabBarLabel: '', headerShown: false }}
                 />
-                <Stack.Screen name={"Charging"} component={Availability} options={{ tabBarLabel: '', headerShown: false }}
+                <Stack.Screen name={"Charging"} component={Charging} options={{ tabBarLabel: '', headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

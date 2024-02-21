@@ -6,7 +6,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 export default function Reservation() {
     const navigator = useNavigation();
     const route = useRoute();
-    const { park, lable, name } = route.params;
+    const { park, lable, name, id } = route.params;
     const [phoneNumber, setPhoneNumber] = useState('');
 
     const handlePhoneNumberChange = (value) => {
@@ -14,22 +14,12 @@ export default function Reservation() {
     };
 
     const handleContinuePress = () => {
-        console.log('Phone Number:', phoneNumber);
-        fetch('http://localhost:3000/otp/send-otp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ phoneNumber }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            })
-        navigator.navigate('Verify');
+        navigator.navigate('Verify', {
+            park,
+            lable,
+            name,
+            id,
+        });
     };
 
     return (
@@ -37,7 +27,7 @@ export default function Reservation() {
             <BackButton />
             <View style={styles.reservation}>
                 <Text style={styles.confirmationText}>Confirmation</Text>
-                <Text style={styles.headerText}>Sello</Text>
+                <Text style={styles.headerText}>{name}</Text>
                 <View style={styles.header}>
                     <Text style={styles.additionalText1}>{lable}</Text>
                     <Text style={styles.additionalText}>{park}</Text>
@@ -68,7 +58,6 @@ export default function Reservation() {
 
 const styles = StyleSheet.create({
     confirmationText: {
-
         fontSize: 40,
         fontWeight: 'bold',
         marginBottom: 20,

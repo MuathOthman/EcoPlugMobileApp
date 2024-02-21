@@ -2,14 +2,20 @@ import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BackButton from "./BackButton";
-export default function Availability() {
+import { useNavigation, useRoute } from "@react-navigation/native";
+
+export default function Charging() {
+    const route = useRoute();
+    const navigator = useNavigation();
+    const { park, lable, id } = route.params;
+
     return (
         <View style={styles.container}>
             <BackButton />
             <Text style={styles.text}>CHARGING</Text>
             <View style={styles.whiteBox}>
-                <Text style={styles.nameText}>Volkswagen</Text>
-                <Text style={styles.name1Text}>ID.3</Text>
+                <Text style={styles.nameText}>{lable}</Text>
+                <Text style={styles.name1Text}>{park}</Text>
                 <View style={styles.progressCircle}>
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
                     <Text style={styles.circleText}>50%</Text>

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import BackButton from './BackButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import Type from "./Type";
 
 export default function ParkingScreen() {
     const navigation = useNavigation();
     const route = useRoute();
-    const { id } = route.params;
+    const { id, name } = route.params;
     const [parkings, setParkings] = useState([]);
 
     useEffect(() => {
@@ -35,8 +36,10 @@ export default function ParkingScreen() {
             const handlePress = () => {
                 if (parking.tila !== 1) {
                     navigation.navigate('Reservation', {
+                        id: id,
                         park: parking.parkki,
                         lable: parkingTypeLabel,
+                        name: name,
                     });
                 }
             };

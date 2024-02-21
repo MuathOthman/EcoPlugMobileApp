@@ -23,7 +23,7 @@ export default function Type({ id, name, address, postalCode, city, setIsVisible
 
     const handleButtonPress = () => {
         setIsVisible(false);
-        navigation.navigate('ParkingScreen', { id });
+        navigation.navigate('ParkingScreen', { id, name });
     };
 
     const handleClose = () => {
