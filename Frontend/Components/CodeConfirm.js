@@ -6,11 +6,11 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 export default function CodeConfirm() {
     const route = useRoute();
     const navigator = useNavigation();
+    [latausID, setLatausID] = useState();
 
     // Destructure params after defining route
-    const { park, lable, name, id } = route.params;
+    const { park, lable, name, id, phoneNumber, latauspisteID } = route.params;
     const [verificationCode, setVerificationCode] = useState('');
-    const phoneNumber = "+358442379461";
 
     const handleCodeChange = (index, value) => {
         if (/^\d+$/.test(value) || value === '') {
@@ -21,10 +21,26 @@ export default function CodeConfirm() {
     };
 
     const handleContinuePress = () => {
+        fetch('http://localhost:3000/user/create-user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                phoneNumber, // Assuming phoneNumber is a variable defined elsewhere
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                setLatausID(data.latausId);
+            })
+            .catch(error => console.error("Failed to fetch location data:", error));
         navigator.navigate('Charging', {
             park,
             lable,
             id,
+            latausID,
+            latauspisteID
         });
     };
 

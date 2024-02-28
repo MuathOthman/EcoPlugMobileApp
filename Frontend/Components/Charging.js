@@ -7,7 +7,20 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 export default function Charging() {
     const route = useRoute();
     const navigator = useNavigation();
-    const { park, lable, id } = route.params;
+    const { park, lable, id, latausID, latauspisteID } = route.params;
+
+    const setReserved = () => {
+        fetch('http://localhost:3000/charging/start-charging', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                latauspisteID,
+                latausID,
+            }),
+        })
+    }
 
     return (
         <View style={styles.container}>
