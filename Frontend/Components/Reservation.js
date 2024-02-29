@@ -6,7 +6,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 export default function Reservation() {
     const navigator = useNavigation();
     const route = useRoute();
-    const { park, lable, name, id, latauspisteID } = route.params;
+    const { park, lable, name, id, latauspisteID, sahkonhinta } = route.params;
     const [phoneNumber, setPhoneNumber] = useState('');
 
     const handlePhoneNumberChange = (value) => {
@@ -21,6 +21,7 @@ export default function Reservation() {
             id,
             phoneNumber,
             latauspisteID,
+            sahkonhinta,
         });
     };
 

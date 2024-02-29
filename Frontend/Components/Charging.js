@@ -7,9 +7,11 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 export default function Charging() {
     const route = useRoute();
     const navigator = useNavigation();
-    const { park, lable, latauspisteID, phoneNumber } = route.params;
+    const { park, lable, latauspisteID, phoneNumber, sahkonhinta } = route.params;
 
     const [latausID, setLatausID] = useState(null);
+    const [chargingTime, setChargingTime] = useState(null);
+    const [totalCost, setTotalCost] = useState(null);
 
     useEffect(() => {
         const fetchLatausID = async () => {
@@ -30,12 +32,13 @@ export default function Charging() {
 
                 const data = await response.json();
                 setLatausID(data.latausId);
+                setChargingTime(data.kokonaisaika);
+                setTotalCost(data.laskunhinta);
 
                 console.log('LatausID:', data.latausId);
 
                 // Call setReserved inside the then block
                 setReserved(data.latausId);
-
             } catch (error) {
                 console.error('Error fetching latausID:', error);
             }
@@ -74,6 +77,12 @@ export default function Charging() {
         }
     };
 
+    const formatTime = (minutes) => {
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
+        return `${String(hours).padStart(2, '0')}:${String(remainingMinutes).padStart(2, '0')}`;
+    };
+
     return (
         <View style={styles.container}>
             <BackButton />
@@ -90,14 +99,14 @@ export default function Charging() {
             </View>
             <View style={styles.smallBoxesContainer}>
                 <View style={styles.smallBox1}>
-                    <Text style={styles.smallBoxText}>03:50</Text>
+                    <Text style={styles.smallBoxText}>{chargingTime ? formatTime(chargingTime) : '00:00'}</Text>
                     <Text style={styles.smallBox1SubText}>CHARGING TIME SINCE STARTED</Text>
                 </View>
                 <View style={styles.separator} />
                 <Text style={styles.separatorText}></Text>
                 <View style={styles.smallBox2}>
-                    <Text style={styles.smallBox2Text}>22€</Text>
-                    <Text style={styles.smallBox2SubText}>TOTAL COST ACCURED CHARGE</Text>
+                    <Text style={styles.smallBox2Text}>{totalCost ? `${totalCost}€` : '0€'}</Text>
+                    <Text style={styles.smallBox2SubText}>TOTAL COST ACCRUED CHARGE</Text>
                 </View>
             </View>
             <TouchableOpacity style={styles.StopChargingButton}>

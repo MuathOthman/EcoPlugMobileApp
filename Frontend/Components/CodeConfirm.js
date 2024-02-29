@@ -7,7 +7,7 @@ export default function CodeConfirm() {
     const route = useRoute();
     const navigator = useNavigation();
     const [latausID, setLatausID] = useState();
-    const { park, lable, name, id, phoneNumber, latauspisteID } = route.params;
+    const { park, lable, name, id, phoneNumber, latauspisteID, sahkonhinta } = route.params;
     const [verificationCode, setVerificationCode] = useState('');
 
     const handleCodeChange = (index, value) => {
@@ -31,7 +31,7 @@ export default function CodeConfirm() {
 
     const handleContinuePress = () => {
         reserveParkingSpot();
-        console.log("1",phoneNumber)
+        console.log("phoneNumber",phoneNumber)
         fetch('http://localhost:3000/user/create-user', {
             method: 'POST',
             headers: {
@@ -51,6 +51,7 @@ export default function CodeConfirm() {
             latausID,
             latauspisteID,
             phoneNumber,
+            sahkonhinta,
         });
     };
 
@@ -65,7 +66,7 @@ export default function CodeConfirm() {
                     <Text style={styles.additionalText}>{park}</Text>
                 </View>
                 <Text style={styles.verificationText}>Verification code was sent to</Text>
-                <Text style={styles.phoneNumber}>+358 123456789</Text>
+                <Text style={styles.phoneNumber}>{phoneNumber}</Text>
                 <View style={styles.codeInputContainer}>
                     {[0, 1, 2, 3].map((index) => (
                         <TextInput

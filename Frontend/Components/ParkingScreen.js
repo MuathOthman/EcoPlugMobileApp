@@ -40,6 +40,7 @@ export default function ParkingScreen() {
                         park: parking.parkki,
                         lable: parkingTypeLabel,
                         name: name,
+                        sahkonhinta: parking.sahkonhinta,
                         latauspisteID: parking.latauspisteID,
                     });
                 }
