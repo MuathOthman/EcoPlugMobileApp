@@ -83,7 +83,7 @@ export default function Charging() {
                 <Text style={styles.name1Text}>{park}</Text>
                 <View style={styles.progressCircle}>
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
-                    <Text style={styles.circleText}>50%</Text>
+                    <Text style={styles.circleText}>{`${Math.floor(Math.random() * 40) + 1}%`}</Text>
                     <Text style={styles.additionalText}>22kW</Text>
                 </View>
                 <Text style={styles.bottomText}>YOUR CAR IS BEING CHARGED</Text>
