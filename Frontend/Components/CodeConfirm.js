@@ -12,12 +12,23 @@ export default function CodeConfirm() {
     const inputs = useRef(Array.from({ length: 4 }, () => React.createRef()));
 
     const handleCodeChange = (index, value) => {
+        const newCode = [...verificationCode];
         if (/^\d+$/.test(value) || value === '') {
-            const newCode = verificationCode.split('');
             newCode[index] = value;
             setVerificationCode(newCode.join(''));
             if (value && index < inputs.current.length - 1) {
                 inputs.current[index + 1].current.focus();
+            }
+        }
+    };
+
+    const handleBackspace = (index, event) => {
+        if (event.nativeEvent.key === 'Backspace' && index >= 0) {
+            const newCode = [...verificationCode];
+            newCode[index] = '';
+            setVerificationCode(newCode.join(''));
+            if (index > 0) {
+                inputs.current[index - 1].current.focus();
             }
         }
     };
@@ -80,6 +91,7 @@ export default function CodeConfirm() {
                             maxLength={1}
                             value={verificationCode[index]}
                             onChangeText={(value) => handleCodeChange(index, value)}
+                            onKeyPress={(event) => handleBackspace(index, event)}
                         />
                     ))}
                 </View>
@@ -89,7 +101,7 @@ export default function CodeConfirm() {
                     onPress={handleContinuePress}
                     disabled={verificationCode.length < 4}
                 >
-                    <Text style={styles.buttonText}>Continue</Text>
+                    <Text style={styles.buttonText}>START CHARGING</Text>
                 </TouchableOpacity>
             </View>
         </View>
