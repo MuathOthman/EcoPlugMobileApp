@@ -10,8 +10,9 @@ export default function Charging() {
     const { park, lable, latauspisteID, phoneNumber, sahkonhinta } = route.params;
 
     const [latausID, setLatausID] = useState(null);
-    const [chargingTime, setChargingTime] = useState(null);
+    const [chargingTime, setChargingTime] = useState(0);
     const [totalCost, setTotalCost] = useState(null);
+    const [randomPercentage, setRandomPercentage] = useState(0);
 
     useEffect(() => {
         const fetchLatausID = async () => {
@@ -31,21 +32,30 @@ export default function Charging() {
                 }
 
                 const data = await response.json();
+
+                const kokonaisaika = Number(data.kokonaisaika);
+
+                if (!isNaN(kokonaisaika)) {
+                    setChargingTime(kokonaisaika);
+                } else if (data.kokonaisaika !== null && data.kokonaisaika !== undefined) {
+                    console.warn('Invalid value for charging time:', data.kokonaisaika);
+                }
+
                 setLatausID(data.latausId);
-                setChargingTime(data.kokonaisaika);
                 setTotalCost(data.laskunhinta);
 
                 console.log('LatausID:', data.latausId);
 
-                // Call setReserved inside the then block
                 setReserved(data.latausId);
+
+                startTimer();
             } catch (error) {
                 console.error('Error fetching latausID:', error);
             }
+
         };
 
         fetchLatausID();
-
     }, [phoneNumber]);
 
     const setReserved = (fetchedLatausID) => {
@@ -77,11 +87,31 @@ export default function Charging() {
         }
     };
 
-    const formatTime = (minutes) => {
-        const hours = Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-        return `${String(hours).padStart(2, '0')}:${String(remainingMinutes).padStart(2, '0')}`;
+    const startTimer = () => {
+        const timerInterval = setInterval(() => {
+            setChargingTime(prevTime => prevTime + 1);
+        }, 1000);
+
+        return () => clearInterval(timerInterval);
     };
+
+    const stopCharging = () => {
+        // Implement the logic to stop charging here
+    };
+
+    const formatTime = (seconds) => {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+    };
+
+    useEffect(() => {
+        // Generate random percentage only when the component mounts
+        const newRandomPercentage = Math.floor(Math.random() * 40) + 1;
+        setRandomPercentage(newRandomPercentage);
+    }, [phoneNumber]);
 
     return (
         <View style={styles.container}>
@@ -92,14 +122,14 @@ export default function Charging() {
                 <Text style={styles.name1Text}>{park}</Text>
                 <View style={styles.progressCircle}>
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
-                    <Text style={styles.circleText}>{`${Math.floor(Math.random() * 40) + 1}%`}</Text>
+                    <Text style={styles.circleText}>{`${randomPercentage}%`}</Text>
                     <Text style={styles.additionalText}>22kW</Text>
                 </View>
                 <Text style={styles.bottomText}>YOUR CAR IS BEING CHARGED</Text>
             </View>
             <View style={styles.smallBoxesContainer}>
                 <View style={styles.smallBox1}>
-                    <Text style={styles.smallBoxText}>{chargingTime ? formatTime(chargingTime) : '00:00'}</Text>
+                    <Text style={styles.smallBoxText}>{formatTime(chargingTime)}</Text>
                     <Text style={styles.smallBox1SubText}>CHARGING TIME SINCE STARTED</Text>
                 </View>
                 <View style={styles.separator} />
@@ -109,13 +139,12 @@ export default function Charging() {
                     <Text style={styles.smallBox2SubText}>TOTAL COST ACCRUED CHARGE</Text>
                 </View>
             </View>
-            <TouchableOpacity style={styles.StopChargingButton}>
+            <TouchableOpacity style={styles.StopChargingButton} onPress={stopCharging}>
                 <Text style={styles.buttonText}>STOP CHARGING</Text>
             </TouchableOpacity>
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
