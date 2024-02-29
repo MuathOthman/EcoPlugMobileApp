@@ -6,9 +6,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 export default function CodeConfirm() {
     const route = useRoute();
     const navigator = useNavigation();
-    [latausID, setLatausID] = useState();
-
-    // Destructure params after defining route
+    const [latausID, setLatausID] = useState();
     const { park, lable, name, id, phoneNumber, latauspisteID } = route.params;
     const [verificationCode, setVerificationCode] = useState('');
 
@@ -20,27 +18,39 @@ export default function CodeConfirm() {
         }
     };
 
+    const reserveParkingSpot = () => {
+        fetch(`http://localhost:3000/sijainnit/reserve/${latauspisteID}`, {
+            method: 'POST',
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Parking spot reserved successfully:', data);
+            })
+            .catch(error => console.error('Failed to reserve parking spot:', error));
+    };
+
     const handleContinuePress = () => {
+        reserveParkingSpot();
+        console.log("1",phoneNumber)
         fetch('http://localhost:3000/user/create-user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                phoneNumber, // Assuming phoneNumber is a variable defined elsewhere
+                phoneNumber,
             }),
         })
             .then(response => response.json())
-            .then(data => {
-                setLatausID(data.latausId);
-            })
-            .catch(error => console.error("Failed to fetch location data:", error));
+            .catch(error => console.error('Failed to fetch location data:', error));
+
         navigator.navigate('Charging', {
             park,
             lable,
             id,
             latausID,
-            latauspisteID
+            latauspisteID,
+            phoneNumber,
         });
     };
 
@@ -68,7 +78,6 @@ export default function CodeConfirm() {
                     ))}
                 </View>
 
-                {/* Continue Button */}
                 <TouchableOpacity
                     style={styles.continueButton}
                     onPress={handleContinuePress}
@@ -80,6 +89,7 @@ export default function CodeConfirm() {
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     containers: {
         flex: 1,

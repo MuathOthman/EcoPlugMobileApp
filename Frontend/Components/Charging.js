@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BackButton from "./BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -7,20 +7,72 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 export default function Charging() {
     const route = useRoute();
     const navigator = useNavigation();
-    const { park, lable, id, latausID, latauspisteID } = route.params;
+    const { park, lable, latauspisteID, phoneNumber } = route.params;
 
-    const setReserved = () => {
-        fetch('http://localhost:3000/charging/start-charging', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                latauspisteID,
-                latausID,
-            }),
-        })
-    }
+    const [latausID, setLatausID] = useState(null);
+
+    useEffect(() => {
+        const fetchLatausID = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/user/get-user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        phoneNumber,
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch latausID');
+                }
+
+                const data = await response.json();
+                setLatausID(data.latausId);
+
+                console.log('LatausID:', data.latausId);
+
+                // Call setReserved inside the then block
+                setReserved(data.latausId);
+
+            } catch (error) {
+                console.error('Error fetching latausID:', error);
+            }
+        };
+
+        fetchLatausID();
+
+    }, [phoneNumber]);
+
+    const setReserved = (fetchedLatausID) => {
+        if (fetchedLatausID) {
+            fetch('http://localhost:3000/charging/start-charging', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    latauspisteID,
+                    latausID: fetchedLatausID,
+                }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to start charging');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Charging started successfully:', data);
+                })
+                .catch(error => {
+                    console.error('Error starting charging:', error);
+                });
+        } else {
+            console.warn('LatausID is not available yet.');
+        }
+    };
 
     return (
         <View style={styles.container}>
