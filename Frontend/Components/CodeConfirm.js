@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from "./BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -9,12 +9,16 @@ export default function CodeConfirm() {
     const [latausID, setLatausID] = useState();
     const { park, lable, name, id, phoneNumber, latauspisteID, sahkonhinta } = route.params;
     const [verificationCode, setVerificationCode] = useState('');
+    const inputs = useRef(Array.from({ length: 4 }, () => React.createRef()));
 
     const handleCodeChange = (index, value) => {
         if (/^\d+$/.test(value) || value === '') {
             const newCode = verificationCode.split('');
             newCode[index] = value;
             setVerificationCode(newCode.join(''));
+            if (value && index < inputs.current.length - 1) {
+                inputs.current[index + 1].current.focus();
+            }
         }
     };
 
@@ -71,6 +75,7 @@ export default function CodeConfirm() {
                     {[0, 1, 2, 3].map((index) => (
                         <TextInput
                             key={index}
+                            ref={inputs.current[index]}
                             style={styles.codeInput}
                             maxLength={1}
                             value={verificationCode[index]}
