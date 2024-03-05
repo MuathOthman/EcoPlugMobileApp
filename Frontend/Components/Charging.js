@@ -8,7 +8,7 @@ import ConfirmationModal from './ConfirmationModal';
 export default function Charging() {
     const route = useRoute();
     const navigator = useNavigation();
-    const { park, label, latauspisteID, phoneNumber, sahkonhinta } = route.params;
+    const { park, lable, latauspisteID, phoneNumber, sahkonhinta } = route.params;
 
     const [latausID, setLatausID] = useState(null);
     const [chargingTime, setChargingTime] = useState(0);
@@ -102,7 +102,7 @@ export default function Charging() {
 
     const handleConfirmStopCharging = () => {
         setIsConfirmationModalVisible(false);
-        navigator.navigate('ChargingSummaryScreen', { chargingTime, totalCost });
+        navigator.navigate('Receipt', { chargingTime, totalCost });
     };
 
     const handleCancelStopCharging = () => {
@@ -127,7 +127,7 @@ export default function Charging() {
             <BackButton />
             <Text style={styles.text}>CHARGING</Text>
             <View style={styles.whiteBox}>
-                <Text style={styles.nameText}>{label}</Text>
+                <Text style={styles.nameText}>{lable}</Text>
                 <Text style={styles.name1Text}>{park}</Text>
                 <View style={styles.progressCircle}>
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
