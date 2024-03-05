@@ -8,7 +8,8 @@ import ParkingScreen from './Components/ParkingScreen'; // Replace with your act
 import ReservationScreen from './Components/Reservation'; // Replace with your actual screen components
 import CodeConfirm from "./Components/CodeConfirm";
 import Charging from "./Components/Charging";
-import WelcomePage from './Pages/WelcomePage'; // Import the WelcomePage component
+import WelcomePage from './Pages/WelcomePage';
+import ChargingSummaryScreen from "./Components/ChargingSummaryScreen";
 
 
 
@@ -43,6 +44,11 @@ const App = () => {
                 <Stack.Screen
                     name="SearchPage"
                     component={SearchPage}
+                    options={{ tabBarLabel: '', headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Receipt"
+                    component={ChargingSummaryScreen}
                     options={{ tabBarLabel: '', headerShown: false }}
                 />
                 <Stack.Screen
