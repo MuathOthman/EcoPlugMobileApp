@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BackButton from "./BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import ConfirmationModal from './ConfirmationModal';
 
 export default function Charging() {
     const route = useRoute();
     const navigator = useNavigation();
-    const { park, lable, latauspisteID, phoneNumber, sahkonhinta } = route.params;
+    const { park, label, latauspisteID, phoneNumber, sahkonhinta } = route.params;
 
     const [latausID, setLatausID] = useState(null);
     const [chargingTime, setChargingTime] = useState(0);
     const [totalCost, setTotalCost] = useState(null);
     const [randomPercentage, setRandomPercentage] = useState(0);
+    const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
 
     useEffect(() => {
         const fetchLatausID = async () => {
@@ -52,7 +54,6 @@ export default function Charging() {
             } catch (error) {
                 console.error('Error fetching latausID:', error);
             }
-
         };
 
         fetchLatausID();
@@ -96,7 +97,16 @@ export default function Charging() {
     };
 
     const stopCharging = () => {
-        // Implement the logic to stop charging here
+        setIsConfirmationModalVisible(true);
+    };
+
+    const handleConfirmStopCharging = () => {
+        setIsConfirmationModalVisible(false);
+        navigator.navigate('ChargingSummaryScreen', { chargingTime, totalCost });
+    };
+
+    const handleCancelStopCharging = () => {
+        setIsConfirmationModalVisible(false);
     };
 
     const formatTime = (seconds) => {
@@ -108,7 +118,6 @@ export default function Charging() {
     };
 
     useEffect(() => {
-        // Generate random percentage only when the component mounts
         const newRandomPercentage = Math.floor(Math.random() * 40) + 1;
         setRandomPercentage(newRandomPercentage);
     }, [phoneNumber]);
@@ -118,7 +127,7 @@ export default function Charging() {
             <BackButton />
             <Text style={styles.text}>CHARGING</Text>
             <View style={styles.whiteBox}>
-                <Text style={styles.nameText}>{lable}</Text>
+                <Text style={styles.nameText}>{label}</Text>
                 <Text style={styles.name1Text}>{park}</Text>
                 <View style={styles.progressCircle}>
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
@@ -142,9 +151,15 @@ export default function Charging() {
             <TouchableOpacity style={styles.StopChargingButton} onPress={stopCharging}>
                 <Text style={styles.buttonText}>STOP CHARGING</Text>
             </TouchableOpacity>
+            <ConfirmationModal
+                visible={isConfirmationModalVisible}
+                onConfirm={handleConfirmStopCharging}
+                onCancel={handleCancelStopCharging}
+            />
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
