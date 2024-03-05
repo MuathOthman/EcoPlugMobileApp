@@ -3,7 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import { StyleSheet, Text} from 'react-native';
 import BackButton from "./BackButton";
 
-const ChargingSummaryScreen = ({ route }) => {
+const Receipt = ({ route }) => {
     const { chargingTime, totalCost } = route.params;
 
     return (
@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
         width: 350,
     },
 });
-export default ChargingSummaryScreen;
+export default Receipt;

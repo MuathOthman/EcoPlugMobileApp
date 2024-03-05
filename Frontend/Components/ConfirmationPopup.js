@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const ConfirmationModal = ({ visible, onConfirm, onCancel }) => {
+const ConfirmationPopup = ({ visible, onConfirm, onCancel }) => {
     return (
         <Modal
             animationType="slide"
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ConfirmationModal;
+export default ConfirmationPopup;

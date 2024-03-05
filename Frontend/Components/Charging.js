@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BackButton from "./BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import ConfirmationModal from './ConfirmationModal';
+import ConfirmationPopup from './ConfirmationPopup';
 
 export default function Charging() {
     const route = useRoute();
@@ -151,7 +151,7 @@ export default function Charging() {
             <TouchableOpacity style={styles.StopChargingButton} onPress={stopCharging}>
                 <Text style={styles.buttonText}>STOP CHARGING</Text>
             </TouchableOpacity>
-            <ConfirmationModal
+            <ConfirmationPopup
                 visible={isConfirmationModalVisible}
                 onConfirm={handleConfirmStopCharging}
                 onCancel={handleCancelStopCharging}

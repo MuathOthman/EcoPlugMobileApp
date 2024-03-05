@@ -9,7 +9,7 @@ import ReservationScreen from './Components/Reservation'; // Replace with your a
 import CodeConfirm from "./Components/CodeConfirm";
 import Charging from "./Components/Charging";
 import WelcomePage from './Pages/WelcomePage';
-import ChargingSummaryScreen from "./Components/ChargingSummaryScreen";
+import Receipt from "./Components/Receipt";
 
 
 
@@ -48,7 +48,7 @@ const App = () => {
                 />
                 <Stack.Screen
                     name="Receipt"
-                    component={ChargingSummaryScreen}
+                    component={Receipt}
                     options={{ tabBarLabel: '', headerShown: false }}
                 />
                 <Stack.Screen
