@@ -12,7 +12,7 @@ export default function Charging() {
 
     const [latausID, setLatausID] = useState(null);
     const [chargingTime, setChargingTime] = useState(0);
-    const [totalCost, setTotalCost] = useState(null);
+    const [totalCost, setTotalCost] = useState(0);
     const [randomPercentage, setRandomPercentage] = useState(0);
     const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
 
@@ -44,20 +44,34 @@ export default function Charging() {
                 }
 
                 setLatausID(data.latausId);
-                setTotalCost(data.laskunhinta);
 
-                console.log('LatausID:', data.latausId);
+                // Calculate totalCost based on sahkonhinta
+                let costPerMinute;
+                if (sahkonhinta === 0.22) {
+                    costPerMinute = (sahkonhinta * 12) / 60;
+                } else if (sahkonhinta === 0.5) {
+                    costPerMinute = (sahkonhinta * 50) / 60;
+                } else {
+                    // Default to 0 if sahkonhinta is neither 0.22 nor 0.5
+                    costPerMinute = 0;
+                }
 
-                setReserved(data.latausId);
+                // Calculate totalCost based on time and update every minute
+                setTotalCost((costPerMinute * Math.floor(chargingTime / 60)).toFixed(2));
 
-                startTimer();
+                const timerInterval = setInterval(() => {
+                    setChargingTime(prevTime => prevTime + 60); // Increment charging time by 1 minute
+                    setTotalCost(prevCost => (prevCost + costPerMinute).toFixed(2));
+                }, 60000); // 60000 milliseconds = 1 minute
+
+                return () => clearInterval(timerInterval);
             } catch (error) {
                 console.error('Error fetching latausID:', error);
             }
         };
 
         fetchLatausID();
-    }, [phoneNumber]);
+    }, [phoneNumber, sahkonhinta]);
 
     const setReserved = (fetchedLatausID) => {
         if (fetchedLatausID) {
@@ -101,8 +115,9 @@ export default function Charging() {
     };
 
     const handleConfirmStopCharging = () => {
+        const chargingTimeInMinutes = Math.floor(chargingTime / 60);
         setIsConfirmationModalVisible(false);
-        navigator.navigate('Receipt', { chargingTime, totalCost });
+        navigator.navigate('Receipt', { chargingTime: chargingTimeInMinutes, totalCost });
     };
 
     const handleCancelStopCharging = () => {
@@ -112,7 +127,6 @@ export default function Charging() {
     const formatTime = (seconds) => {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
-        const remainingSeconds = seconds % 60;
 
         return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
     };
