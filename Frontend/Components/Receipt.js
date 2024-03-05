@@ -1,30 +1,33 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-import { StyleSheet, Text} from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import BackButton from "./BackButton";
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
 
-const Receipt = ({ route }) => {
+export default function Receipt({ route }) {
+    const navigation = useNavigation(); // Initialize useNavigation
     const { chargingTime, totalCost } = route.params;
+
+    const handleClosePress = () => {
+        navigation.navigate('Map'); // Replace 'YourMapScreen' with the actual screen name of your map
+    };
+
 
     return (
         <View style={styles.container}>
             <BackButton />
             <View style={styles.header}>
-                <Text style={styles.title}>Charging Summary</Text>
-            </View>
-            <View style={styles.batterycharge}>
-                <Text style={styles.title2}>Battery level</Text>
-                <Text style={styles.battery}>..90..%</Text>
+                <Text style={styles.title}>Receipt</Text>
             </View>
             <View style={styles.chargingtime}>
-                <Text style={styles.text}>Charging Time:</Text>
-                <Text style={styles.chargingtime2}>{chargingTime}</Text>
+                <Text style={styles.text}>Charging Time</Text>
+                <Text style={styles.chargingtime2}>{chargingTime} min</Text>
             </View>
             <View style={styles.box}>
-                <Text style={styles.text}>Total Cost:</Text>
-                <Text style={styles.totalcosttext}>{totalCost}</Text>
+                <Text style={styles.text}>Total Cost</Text>
+                <Text style={styles.totalcosttext}>{totalCost} €</Text>
             </View>
-            <TouchableOpacity style={styles.StopChargingButton} onPress={"Close"}>
+            <TouchableOpacity style={styles.StopChargingButton} onPress={handleClosePress}>
                 <Text style={styles.buttonText}>Close</Text>
             </TouchableOpacity>
         </View>
@@ -38,23 +41,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDF6E9',
     },
     header: {
-        marginTop: 70,
+        marginTop: 130,
+        marginBottom: 39,
     },
     closebox: {
         backgroundColor: '#ffffff',
         borderRadius: 40,
         width: 300,
         marginBottom: 10,
-        marginTop: 80,
+        marginTop: 40,
         height: 70,
         justifyContent: "center",
         alignItems: "center",
     },
     closetext: {
-       fontSize: 20,
-    },
-    battery: {
-       fontSize: 40,
+        fontSize: 20,
     },
     text: {
         fontSize: 30,
@@ -83,13 +84,13 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         width: 300,
         marginBottom: 10,
-        marginTop: 40,
+        marginTop: 70,
         height: 150,
         justifyContent: "center",
         alignItems: "center",
     },
     title: {
-        fontSize: 40,
+        fontSize: 45,
         fontWeight: 'bold',
     },
     chargingtime: {
@@ -103,8 +104,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     totalcosttext: {
-        marginTop: 40,
-        fontSize: 20,
+        marginTop: 20,
+        fontSize: 30,
     },
     buttonText: {
         color: 'white',
@@ -115,8 +116,7 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 40,
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: 124,
         width: 350,
     },
 });
-export default Receipt;
