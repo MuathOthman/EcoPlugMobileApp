@@ -45,24 +45,21 @@ export default function Charging() {
 
                 setLatausID(data.latausId);
 
-                // Calculate totalCost based on sahkonhinta
                 let costPerMinute;
                 if (sahkonhinta === 0.22) {
                     costPerMinute = (sahkonhinta * 12) / 60;
                 } else if (sahkonhinta === 0.5) {
                     costPerMinute = (sahkonhinta * 50) / 60;
                 } else {
-                    // Default to 0 if sahkonhinta is neither 0.22 nor 0.5
                     costPerMinute = 0;
                 }
 
-                // Calculate totalCost based on time and update every minute
                 setTotalCost((costPerMinute * Math.floor(chargingTime / 60)).toFixed(2));
 
                 const timerInterval = setInterval(() => {
-                    setChargingTime(prevTime => prevTime + 60); // Increment charging time by 1 minute
-                    setTotalCost(prevCost => (prevCost + costPerMinute).toFixed(2));
-                }, 60000); // 60000 milliseconds = 1 minute
+                    setChargingTime(prevTime => prevTime + 60);
+                    setTotalCost(prevCost => (parseFloat(prevCost) + costPerMinute).toFixed(2));
+                }, 60000);
 
                 return () => clearInterval(timerInterval);
             } catch (error) {
@@ -72,6 +69,8 @@ export default function Charging() {
 
         fetchLatausID();
     }, [phoneNumber, sahkonhinta]);
+
+
 
     const setReserved = (fetchedLatausID) => {
         if (fetchedLatausID) {
@@ -114,10 +113,38 @@ export default function Charging() {
         setIsConfirmationModalVisible(true);
     };
 
-    const handleConfirmStopCharging = () => {
-        const chargingTimeInMinutes = Math.floor(chargingTime / 60);
-        setIsConfirmationModalVisible(false);
-        navigator.navigate('Receipt', { chargingTime: chargingTimeInMinutes, totalCost });
+    const handleConfirmStopCharging = async () => {
+        try {
+            const chargingTimeInMinutes = Math.floor(chargingTime / 60);
+
+            await fetch('http://localhost:3000/user/update-user', {
+             method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                 },
+              body: JSON.stringify({
+                  latausID,
+                  chargingTime,
+                  totalCost,
+               }),
+             });
+
+            await fetch('http://localhost:3000/user/free-latauspiste', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    latauspisteID,
+                }),
+            });
+
+            setIsConfirmationModalVisible(false);
+            console.log(latausID, chargingTime, totalCost);
+            navigator.navigate('Receipt', { chargingTime: chargingTimeInMinutes, totalCost });
+        } catch (error) {
+            console.error('Error stopping charging:', error);
+        }
     };
 
     const handleCancelStopCharging = () => {
