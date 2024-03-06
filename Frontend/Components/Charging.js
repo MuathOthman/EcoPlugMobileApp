@@ -202,7 +202,7 @@ export default function Charging() {
                 <View style={styles.separator} />
                 <View style={styles.smallBox2}>
                     <Text style={styles.smallBox2Text}>{totalCost ? `${totalCost}€` : '0€'}</Text>
-                    <Text style={styles.smallBox2SubText}>TOTAL COST ACCRUED CHARGE</Text>
+                    <Text style={styles.smallBox2SubText}>TOTAL COST ACCURED CHARGE</Text>
                 </View>
             </View>
             <TouchableOpacity style={styles.StopChargingButton} onPress={stopCharging}>
