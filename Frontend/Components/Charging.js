@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -147,6 +147,14 @@ export default function Charging() {
         }
     };
 
+    const randomColor = useMemo(() => {
+        if (typeof randomPercentage === 'number') {
+            return randomPercentage < 40 ? '#EF0107' : randomPercentage < 60 ? 'yellow' : '#03C03C';
+        }
+        return 'black'; // Default color if randomPercentage is not a number
+    }, [randomPercentage]);
+
+
     const handleCancelStopCharging = () => {
         setIsConfirmationModalVisible(false);
     };
@@ -159,7 +167,7 @@ export default function Charging() {
     };
 
     useEffect(() => {
-        const newRandomPercentage = Math.floor(Math.random() * 40) + 1;
+        const newRandomPercentage = Math.floor(Math.random() * 80) + 1;
         setRandomPercentage(newRandomPercentage);
     }, [phoneNumber]);
 
@@ -170,6 +178,16 @@ export default function Charging() {
                 <Text style={styles.nameText}>{lable}</Text>
                 <Text style={styles.name1Text}>{park}</Text>
                 <View style={styles.progressCircle}>
+                    <View
+                        style={[
+                            styles.innerCircle,
+                            {
+                                height: `${randomPercentage}%`,
+                                width: '100%',
+                                backgroundColor: randomColor,
+                            },
+                        ]}
+                    />
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
                     <Text style={styles.circleText}>{`${randomPercentage}%`}</Text>
                     <Text style={styles.additionalText}>{`${sahkonhinta}W`}</Text>
@@ -182,7 +200,6 @@ export default function Charging() {
                     <Text style={styles.smallBox1SubText}>CHARGING TIME SINCE STARTED</Text>
                 </View>
                 <View style={styles.separator} />
-                <Text style={styles.separatorText}></Text>
                 <View style={styles.smallBox2}>
                     <Text style={styles.smallBox2Text}>{totalCost ? `${totalCost}€` : '0€'}</Text>
                     <Text style={styles.smallBox2SubText}>TOTAL COST ACCRUED CHARGE</Text>
@@ -235,10 +252,17 @@ const styles = StyleSheet.create({
         height: 220,
         borderRadius: 150,
         borderWidth: 7,
-        borderColor: 'black',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        overflow: 'hidden'
+    },
+    innerCircle: {
+        position: 'absolute',
+        borderRadius: 10,
+        bottom: 0,
+        top: 'auto',
     },
     circleText: {
         fontSize: 45,
