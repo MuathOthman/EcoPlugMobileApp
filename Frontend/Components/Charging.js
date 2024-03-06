@@ -126,6 +126,7 @@ export default function Charging() {
                   latausID,
                   chargingTime,
                   totalCost,
+                  phoneNumber,
                }),
              });
 
