@@ -166,7 +166,6 @@ export default function Charging() {
 
     return (
         <View style={styles.container}>
-            <BackButton />
             <Text style={styles.text}>CHARGING</Text>
             <View style={styles.whiteBox}>
                 <Text style={styles.nameText}>{lable}</Text>

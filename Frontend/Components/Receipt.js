@@ -15,7 +15,6 @@ export default function Receipt({ route }) {
 
     return (
         <View style={styles.container}>
-            <BackButton />
             <View style={styles.header}>
                 <Text style={styles.title}>Receipt</Text>
             </View>
