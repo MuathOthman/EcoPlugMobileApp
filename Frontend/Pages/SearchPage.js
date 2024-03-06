@@ -31,6 +31,13 @@ export default function SearchPage() {
         setFilteredLocations(filtered);
     };
 
+    const navigateToParkingScreen = (location) => {
+        navigation.navigate('ParkingScreen', {
+            id: location.sijainti_ID, // assuming you have an ID property in your location data
+            name: location.nimi,
+        });
+    };
+
     return (
         <View style={styles.container}>
             <BackButton />
@@ -51,7 +58,7 @@ export default function SearchPage() {
                             address={loc.osoite}
                             postalCode={loc.postinumero}
                             city={loc.kaupunki}
-                            onPress={() => navigateToMap()} // Add onPress to navigate to MapComponent
+                            onPress={() => navigateToParkingScreen(loc)} // Pass the location data to the handler
                         />
                     ))}
                 </View>

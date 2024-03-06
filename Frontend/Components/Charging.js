@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import BackButton from "./BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import ConfirmationPopup from './ConfirmationPopup';
 
@@ -173,7 +172,7 @@ export default function Charging() {
                 <View style={styles.progressCircle}>
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
                     <Text style={styles.circleText}>{`${randomPercentage}%`}</Text>
-                    <Text style={styles.additionalText}>22kW</Text>
+                    <Text style={styles.additionalText}>{`${sahkonhinta}W`}</Text>
                 </View>
                 <Text style={styles.bottomText}>YOUR CAR IS BEING CHARGED</Text>
             </View>

@@ -1,26 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-export default function PlugLocation({ name, address, postalCode, city }) {
+export default function PlugLocation({ name, address, postalCode, city, onPress }) {
     return (
-        <View style={styles.innerContainer}>
-            <Icon name="charging-station" size={45} color="black" />
-            <View style={styles.textContainer}>
-                <Text style={styles.header}>{name}</Text>
-                <Text style={styles.smallText}>{`${address} ${postalCode} ${city}`}</Text>
+        <TouchableOpacity onPress={onPress} style={styles.touchableContainer}>
+            <View style={styles.innerContainer}>
+                <Icon name="charging-station" size={45} color="black" />
+                <View style={styles.textContainer}>
+                    <Text style={styles.header}>{name}</Text>
+                    <Text style={styles.smallText}>{`${address} ${postalCode} ${city}`}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
-// Define your styles here
 const styles = StyleSheet.create({
+    touchableContainer: {
+        width: '100%',
+    },
     innerContainer: {
         zIndex: 110,
         top: -10.5,
         width: 430,
-        backgroundColor: "white",
+        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
         padding: 20,

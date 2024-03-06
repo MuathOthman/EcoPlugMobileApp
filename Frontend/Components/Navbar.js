@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState, useCallback } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 const iconData = [
     { name: "home-outline" },
@@ -13,13 +13,20 @@ const iconData = [
 const screenMapping = {
     "home-outline": "Map",
     "car-sport-outline": "SearchPage",
-    "settings-outline": "Charging",
-    "person-outline": "Verify",
+    "settings-outline": "Map",
+    "person-outline": "Map",
 };
 
 export default function Navbar() {
     const navigation = useNavigation();
     const [activeIcon, setActiveIcon] = useState(0);
+
+    // Reset active icon to 0 when navigating to Map screen
+    useFocusEffect(
+        useCallback(() => {
+            setActiveIcon(0);
+        }, [])
+    );
 
     const handleIconPress = (index) => {
         setActiveIcon(index);
