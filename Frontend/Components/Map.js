@@ -4,7 +4,6 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 import Type from "./Type";
 import Navbar from "./Navbar";
-import ParkingScreen from "./ParkingScreen";
 import { useNavigation } from '@react-navigation/native';
 
 export default function Map() {

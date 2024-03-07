@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import BackButton from "./BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function CodeConfirm() {

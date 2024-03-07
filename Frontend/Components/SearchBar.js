@@ -1,6 +1,5 @@
 import React from "react";
 import {StyleSheet,Text, View, TextInput} from "react-native";
-import {Ionicons} from "@expo/vector-icons";
 
 export default function Navbar() {
     return (
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
         width: "90%",
         height: 50,
         borderRadius: 40,
-        alignSelf: 'center', // This will center the navbar in the parent container
+        alignSelf: 'center',
         borderColor: "black",
         borderWidth: 0.5,
     },

@@ -1,15 +1,14 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { StyleSheet, Text } from 'react-native';
-import BackButton from "./BackButton";
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
+import { useNavigation } from "@react-navigation/native";
 
 export default function Receipt({ route }) {
-    const navigation = useNavigation(); // Initialize useNavigation
+    const navigation = useNavigation();
     const { chargingTime, totalCost } = route.params;
 
     const handleClosePress = () => {
-        navigation.navigate('Map'); // Replace 'YourMapScreen' with the actual screen name of your map
+        navigation.navigate('Map');
     };
 
 
