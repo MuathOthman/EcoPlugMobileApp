@@ -151,7 +151,7 @@ export default function Charging() {
         if (typeof randomPercentage === 'number') {
             return randomPercentage < 40 ? '#EF0107' : randomPercentage < 60 ? 'yellow' : '#03C03C';
         }
-        return 'black'; // Default color if randomPercentage is not a number
+        return 'black';
     }, [randomPercentage]);
 
 
