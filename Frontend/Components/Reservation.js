@@ -13,16 +13,33 @@ export default function Reservation() {
         setPhoneNumber(value);
     };
 
-    const handleContinuePress = () => {
-        navigator.navigate('Verify', {
-            park,
-            lable,
-            name,
-            id,
-            phoneNumber,
-            latauspisteID,
-            sahkonhinta,
-        });
+    const handleContinuePress = async () => {
+        try {
+            console.log('Phone Number:', phoneNumber);
+
+            const response = await fetch('http://localhost:3000/otp/send-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber }),
+            });
+
+            const data = await response.json();
+            console.log('Success:', data);
+
+            navigator.navigate('Verify', {
+                park,
+                lable,
+                name,
+                id,
+                phoneNumber,
+                latauspisteID,
+                sahkonhinta,
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
@@ -57,7 +74,6 @@ export default function Reservation() {
         </View>
     );
 }
-
 
 const styles = StyleSheet.create({
     confirmationText: {

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
+import BakcButton from "./BackButton";
 
 export default function CodeConfirm() {
     const route = useRoute();
@@ -44,33 +45,50 @@ export default function CodeConfirm() {
     };
 
     const handleContinuePress = () => {
+        console.log('Verification Code:', verificationCode);
+
+        if (!verificationCode || !phoneNumber) {
+            console.error('Verification code or phone number is missing.');
+            return;
+        }
+
         reserveParkingSpot();
-        console.log("phoneNumber",phoneNumber)
-        fetch('http://localhost:3000/user/create-user', {
+
+        fetch('http://localhost:3000/otp/verify-otp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                phoneNumber,
-            }),
+            body: JSON.stringify({ "otp": verificationCode, phoneNumber }),
         })
-            .then(response => response.json())
-            .catch(error => console.error('Failed to fetch location data:', error));
-
-        navigator.navigate('Charging', {
-            park,
-            lable,
-            id,
-            latausID,
-            latauspisteID,
-            phoneNumber,
-            sahkonhinta,
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Success:', data);
+                if (data.message === "approved") {
+                    navigator.navigate('Charging', {
+                        park,
+                        lable,
+                        id,
+                        latausID,
+                        latauspisteID,
+                        phoneNumber,
+                        sahkonhinta,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     };
 
     return (
         <View style={styles.containers}>
+            <BakcButton />
             <View style={styles.codeConfirm}>
                 <Text style={styles.confirmationText}>Confirmation</Text>
                 <Text style={styles.headerText}>{name}</Text>
