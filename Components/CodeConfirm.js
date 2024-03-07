@@ -88,7 +88,6 @@ export default function CodeConfirm() {
 
     return (
         <View style={styles.containers}>
-            <BakcButton />
             <View style={styles.codeConfirm}>
                 <Text style={styles.confirmationText}>Confirmation</Text>
                 <Text style={styles.headerText}>{name}</Text>
