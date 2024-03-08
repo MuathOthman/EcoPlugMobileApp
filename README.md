@@ -22,4 +22,4 @@ To realize our vision, we are focusing on developing an efficient charging point
 - Special thanks to [Muath Othman](https://github.com/MuathOthman), [Isabella Kovero](https://github.com/isakovero), [Agrin Sadon](https://github.com/agrinsadon) and [Mohammed Sadik Aziz](https://github.com/mohammedsadik99) for their contributions.
 
 ---
-Feel free to customize this template further based on your project's specific needs.
+
