@@ -17,7 +17,7 @@ Our aim is to create an easy-to-use and efficient system that enhances the smoot
 ## Next Steps
 To realize our vision, we are focusing on developing an efficient charging point monitoring system, designing a user-friendly interface, and ensuring the broader availability of the system to maximize its benefits for electric vehicle users.
 
-- Special thanks to [isabellakovero](https://github.com/isabellakovero) and [agrinsadon](https://github.com/agrinsadon) for their contributions. They have dedicated their time and effort to this project.
+- Special thanks to [muathothman](https://github.com/MuathOthman), [isabellakovero](https://github.com/isakovero), [agrinsadon](https://github.com/agrinsadon) and [mohammedsadikaziz](https://github.com/mohammedsadik99) for their contributions.
 
 ---
-Feel free to customize this template further based on your project's specific needs. Replace the placeholder links with the actual links once you have them available.
+Feel free to customize this template further based on your project's specific needs.
