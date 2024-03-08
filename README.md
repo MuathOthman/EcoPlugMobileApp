@@ -15,7 +15,8 @@ Creating an intelligent system that allows users to track the status of charging
 Our aim is to create an easy-to-use and efficient system that enhances the smoothness of charging electric vehicles. Users can quickly find an available charging point and focus on the hassle-free use of their electric vehicles.
 
 ## Next Steps
-To realize our vision, we are focusing on developing an efficient charging point monitoring system, designing a user-friendly interface, and ensuring the broader availability of the system to maximize its benefits for electric vehicle users.
+To realize our vision, we are focusing on developing an efficient charging point monitoring system, designing a user-friendly interface, and ensuring the broader availability of the system to maximize its benefits for electric vehicle users. We also aim to empower users by providing them with the chance to create their own profiles within the system. This will enhance the personalization of the user experience, allowing individuals to customize settings and preferences.
+
 
 - Special thanks to [muathothman](https://github.com/MuathOthman), [isabellakovero](https://github.com/isakovero), [agrinsadon](https://github.com/agrinsadon) and [mohammedsadikaziz](https://github.com/mohammedsadik99) for their contributions.
 
