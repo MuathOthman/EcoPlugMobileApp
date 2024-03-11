@@ -61,7 +61,7 @@ To get started with EcoPlug Frontend, follow these steps:
 ### Scenario 1: Detailed User Journey
 Upon launching the EcoPlug application, users are warmly welcomed with our logo screen, establishing brand identity and familiarity. The user interface seamlessly transitions into a map interface populated with markers representing each EcoPlug charging station. These markers serve as interactive elements, enabling users to select a station of interest. Upon selecting a station, the map zooms in to provide a closer view of the station area, accompanied by detailed information including the station's name, address, postcode, city, and the current number of available charging stations. Users are then prompted to continue, directing them to a page displaying parking slots associated with the selected station. The intuitive color-coded system indicates slot availability, with green indicating free slots and red indicating reserved slots. Users can easily identify and select a free slot, initiating the process of securing a charging session. Upon selection, users are directed to a confirmation page listing essential details such as the place name, charging type, and spot ID. To proceed, users are required to input their phone number for verification purposes. Once verified, users receive a message containing a 4-digit code to confirm their identity. Upon successful verification, the charging session commences, providing users with real-time updates on battery level percentage, charging time, and associated costs.
 
-### Scenario 1: User Journey Summary
+### User Journey Summary
 1. Launch EcoPlug application.
 2. Welcome screen featuring our logo.
 3. Map interface displaying EcoPlug charging stations.
