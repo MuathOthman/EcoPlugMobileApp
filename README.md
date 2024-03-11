@@ -94,7 +94,7 @@ Upon launching the EcoPlug application, users are warmly welcomed with our logo 
 - **[Other libraries/frameworks used]**: [Brief description of other technologies used in your project]
 
 ## Contributing
-We welcome contributions to [Project Name]! If you would like to contribute, please follow these steps:
+We welcome contributions to EcoPlug! If you would like to contribute, please follow these steps:
 
 1. Fork the repository
 2. Create a new branch (`git checkout -b feature/your-feature`)
@@ -104,10 +104,11 @@ We welcome contributions to [Project Name]! If you would like to contribute, ple
 6. Create a new Pull Request
 
 ## Testing
-Describe how to run tests for your application, if applicable. Include any testing frameworks used and any specific setup steps required for testing.
+To run backend tests, navigate to the backend directory and execute the following command:
 
-## Troubleshooting
-If users encounter any issues or have questions, provide guidance on how they can troubleshoot or seek support. This could include common problems and solutions, as well as how to report bugs or request assistance.
+   ```
+   npm test
+   ```
 
 ## CI/CD Pipeline
 The project includes a Jenkinsfile for continuous integration and deployment. The pipeline stages include:
@@ -132,6 +133,5 @@ For OTP functionality, the project utilizes Twilio. Set up your Twilio account a
 
 ## License
 This project is licensed under the MIT License.
-
 
 ---
