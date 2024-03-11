@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Image, StyleSheet, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
-import Type from "./Type";
+import Availability from "./Availability";
 import Navbar from "./Navbar";
 import { useNavigation } from '@react-navigation/native';
 
@@ -32,7 +32,7 @@ export default function Map() {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3000/sijainnit")
+        fetch("http://172.20.10.7:3002/sijainnit")
             .then(response => response.json())
             .then(data => setLocations(data))
             .catch(error => console.error("Failed to fetch location data:", error));
@@ -58,7 +58,6 @@ export default function Map() {
     return (
         <View style={styles.container}>
             <MapView
-                maxZoomLevel={10}
                 provider={PROVIDER_GOOGLE}
                 ref={mapRef}
                 mapType={'satellite'}
@@ -82,7 +81,7 @@ export default function Map() {
             </MapView>
 
             {selectedLocation && isTypeVisible && (
-                <Type
+                <Availability
                     id={selectedLocation.sijainti_ID}
                     name={selectedLocation.nimi}
                     address={selectedLocation.osoite}

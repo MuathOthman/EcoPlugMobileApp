@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { StyleSheet, Text, View, Image, Animated } from "react-native";
 
-export default function WelcomePage() {
+export default function WelcomeScreen() {
     const fadeAnim = useRef(new Animated.Value(1)).current;
 
     useEffect(() => {

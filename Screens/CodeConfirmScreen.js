@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import BakcButton from "./BackButton";
+import BakcButton from "../Components/BackButton";
 
-export default function CodeConfirm() {
+export default function CodeConfirmScreen() {
     const route = useRoute();
     const navigator = useNavigation();
     const [latausID, setLatausID] = useState();
@@ -34,7 +34,7 @@ export default function CodeConfirm() {
     };
 
     const reserveParkingSpot = () => {
-        fetch(`http://localhost:3000/sijainnit/reserve/${latauspisteID}`, {
+        fetch(`http://172.20.10.7:3002/sijainnit/reserve/${latauspisteID}`, {
             method: 'POST',
         })
             .then(response => response.json())
@@ -54,7 +54,7 @@ export default function CodeConfirm() {
 
         reserveParkingSpot();
 
-        fetch('http://localhost:3000/otp/verify-otp', {
+        fetch('http://172.20.10.7:3002/otp/verify-otp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

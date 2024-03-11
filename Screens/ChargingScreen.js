@@ -2,9 +2,9 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import ConfirmationPopup from './ConfirmationPopup';
+import ConfirmationPopup from '../Components/ConfirmationPopup';
 
-export default function Charging() {
+export default function ChargingScreen() {
     const route = useRoute();
     const navigator = useNavigation();
     const { park, lable, latauspisteID, phoneNumber, sahkonhinta } = route.params;
@@ -18,7 +18,7 @@ export default function Charging() {
     useEffect(() => {
         const fetchLatausID = async () => {
             try {
-                const response = await fetch('http://localhost:3000/user/get-user', {
+                const response = await fetch('http://172.20.10.7:3002/user/get-user', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export default function Charging() {
 
     const setReserved = (fetchedLatausID) => {
         if (fetchedLatausID) {
-            fetch('http://localhost:3000/charging/start-charging', {
+            fetch('http://172.20.10.7:3002/charging/start-charging', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ export default function Charging() {
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Charging started successfully:', data);
+                    console.log('ChargingScreen started successfully:', data);
                 })
                 .catch(error => {
                     console.error('Error starting charging:', error);
@@ -116,7 +116,7 @@ export default function Charging() {
         try {
             const chargingTimeInMinutes = Math.floor(chargingTime / 60);
 
-            await fetch('http://localhost:3000/user/update-user', {
+            await fetch('http://172.20.10.7:3002/user/update-user', {
              method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ export default function Charging() {
                }),
              });
 
-            await fetch('http://localhost:3000/user/free-latauspiste', {
+            await fetch('http://172.20.10.7:3002/user/free-latauspiste', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -190,7 +190,7 @@ export default function Charging() {
                     />
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
                     <Text style={styles.circleText}>{`${randomPercentage}%`}</Text>
-                    <Text style={styles.additionalText}>{`${sahkonhinta}W`}</Text>
+                    <Text style={styles.additionalText}>{`${sahkonhinta * 100}kW`}</Text>
                 </View>
                 <Text style={styles.bottomText}>YOUR CAR IS BEING CHARGED</Text>
             </View>
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FDF6E9',
         alignItems: 'center',
-        paddingTop: 120,
+        paddingTop: 90,
     },
     text: {
         fontSize: 29,

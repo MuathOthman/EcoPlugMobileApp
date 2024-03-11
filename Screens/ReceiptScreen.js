@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { StyleSheet, Text } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-export default function Receipt({ route }) {
+export default function ReceiptScreen({ route }) {
     const navigation = useNavigation();
     const { chargingTime, totalCost } = route.params;
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDF6E9',
     },
     header: {
-        marginTop: 130,
+        marginTop: 90,
         marginBottom: 39,
     },
     closebox: {

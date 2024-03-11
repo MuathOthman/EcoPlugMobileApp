@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import BackButton from "../Components/BackButton";
 import PlugLocation from "../Components/PlugLocation";
 
-export default function SearchPage() {
+export default function SearchScreen() {
     const [locations, setLocations] = useState([]);
     const [search, setSearch] = useState("");
     const [filteredLocations, setFilteredLocations] = useState([]);
@@ -12,7 +12,7 @@ export default function SearchPage() {
     const navigation = useNavigation();
 
     useEffect(() => {
-        fetch("http://localhost:3000/sijainnit")
+        fetch("http://172.20.10.7:3002/sijainnit")
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

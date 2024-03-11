@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Icon from "react-native-vector-icons/FontAwesome6";
 
-export default function Type({ id, name, address, postalCode, city, setIsVisible }) {
+const windowWidth = Dimensions.get('window').width;
+
+export default function Availability({ id, name, address, postalCode, city, setIsVisible }) {
     const navigation = useNavigation();
     const [freeCount, setFreeCount] = useState(0);
 
     useEffect(() => {
         const fetchFreeCount = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/sijainnit/specific/${id}`);
+                const response = await fetch(`http://172.20.10.7:3002/sijainnit/specific/${id}`);
                 const data = await response.json();
                 setFreeCount(data[0].count);
             } catch (error) {
@@ -45,10 +47,10 @@ export default function Type({ id, name, address, postalCode, city, setIsVisible
             <Text style={styles.header2Text}>{`${address} ${postalCode} ${city}`}</Text>
             <Text style={styles.header3Text}>Available Charging Stations</Text>
             <View style={styles.innerContainer}>
-                <Icon name="charging-station" size={45} color="black" />
+                <Icon name="charging-station" size={windowWidth * 0.2} color="black" />
                 <Text style={[styles.countnumber, { color: countTextColor }]}>{freeCount}</Text>
             </View>
-            <TouchableOpacity style={styles.StopChargingButton} onPress={handleButtonPress}>
+            <TouchableOpacity style={styles.stopChargingButton} onPress={handleButtonPress}>
                 <Text style={styles.buttonText}>CONTINUE</Text>
             </TouchableOpacity>
         </View>
@@ -69,65 +71,66 @@ const styles = StyleSheet.create({
     closeButton: {
         position: "absolute",
         borderRadius: 20,
-        top: 10,
-        right: 30,
-        padding: 10,
+        top: windowWidth * 0.02,
+        right: windowWidth * 0.05,
+        padding: windowWidth * 0.02,
     },
     closeButtonText: {
-        fontSize: 33,
+        fontSize: windowWidth * 0.09,
         fontWeight: "bold",
         color: "black",
     },
     headerText: {
         zIndex: 110,
-        fontSize: 33,
+        fontSize: windowWidth * 0.08,
         fontWeight: "bold",
-        marginBottom: 5,
-        marginLeft: 30,
-        marginTop: 60,
+        marginBottom: windowWidth * 0.01,
+        marginLeft: windowWidth * 0.05,
+        marginTop: windowWidth * 0.1,
     },
     header2Text: {
         zIndex: 110,
-        fontSize: 20,
+        fontSize: windowWidth * 0.05,
         fontWeight: "bold",
-        marginLeft: 30,
-        marginBottom: 60,
+        marginLeft: windowWidth * 0.05,
+        marginBottom: windowWidth * 0.15,
     },
     header3Text: {
         zIndex: 110,
-        fontSize: 28,
+        fontSize: windowWidth * 0.07,
         fontWeight: "bold",
-        marginLeft: 30,
-        marginBottom: 20,
+        marginLeft: windowWidth * 0.05,
+        marginBottom: windowWidth * 0.05,
     },
-    StopChargingButton: {
+    stopChargingButton: {
         backgroundColor: 'black',
-        padding: 17,
-        borderRadius: 40,
+        paddingVertical: windowWidth * 0.05,
+        paddingHorizontal: windowWidth * 0.1,
+        borderRadius: windowWidth * 0.1,
         alignItems: 'center',
-        marginLeft: 40,
-        marginTop: 17,
-        width: 350,
+        marginTop: windowWidth * 0.04,
+        width: windowWidth * 0.8,
+        alignSelf: 'center',
     },
     buttonText: {
         color: 'white',
-        fontSize: 25,
+        fontSize: windowWidth * 0.05,
     },
     innerContainer: {
-        marginLeft: 142,
+        marginLeft: windowWidth * 0.32,
         zIndex: 110,
-        top: -10.5,
-        width: 430,
+        top: -windowWidth * 0.015,
+        width: windowWidth * 0.85,
         backgroundColor: "white",
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 20,
+        padding: windowWidth * 0.04,
     },
     countnumber: {
         zIndex: 110,
-        fontSize: 51,
+        fontSize: windowWidth * 0.12,
         fontWeight: 'bold',
-        marginLeft: 20,
-        marginBottom: 1,
+        marginLeft: windowWidth * 0.03,
+        marginBottom: windowWidth * 0.007,
     },
 });

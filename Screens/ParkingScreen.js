@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import BackButton from './BackButton';
+import BackButton from '../Components/BackButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Type from "./Type";
+import Availability from "../Components/Availability";
 
 export default function ParkingScreen() {
     const navigation = useNavigation();
@@ -13,7 +13,7 @@ export default function ParkingScreen() {
     useEffect(() => {
         const fetchParkings = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/sijainnit/parkings/${id}`);
+                const response = await fetch(`http://172.20.10.7:3002/sijainnit/parkings/${id}`);
                 const data = await response.json();
                 setParkings(data);
                 console.log(data);
@@ -31,7 +31,7 @@ export default function ParkingScreen() {
 
         if (parking) {
             const textColor = parking.tila === 0 ? 'green' : 'red';
-            const parkingTypeLabel = colIndex === 0 ? 'Type 2' : 'CCS';
+            const parkingTypeLabel = colIndex === 0 ? 'Availability 2' : 'CCS';
 
             const handlePress = () => {
                 if (parking.tila !== 1) {

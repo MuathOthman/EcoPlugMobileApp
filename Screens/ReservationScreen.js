@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import BackButton from "./BackButton";
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import BackButton from "../Components/BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function Reservation() {
+export default function ReservationScreen() {
     const navigator = useNavigation();
     const route = useRoute();
     const { park, lable, name, id, latauspisteID, sahkonhinta } = route.params;
@@ -17,7 +17,7 @@ export default function Reservation() {
         try {
             console.log('Phone Number:', phoneNumber);
 
-            const response = await fetch('http://localhost:3000/otp/send-otp', {
+            const response = await fetch('http://172.20.10.7:3002/otp/send-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,35 +43,41 @@ export default function Reservation() {
     };
 
     return (
-        <View style={styles.containers}>
-            <BackButton />
-            <View style={styles.reservation}>
-                <Text style={styles.confirmationText}>Confirmation</Text>
-                <Text style={styles.headerText}>{name}</Text>
-                <View style={styles.header}>
-                    <Text style={styles.additionalText1}>{lable}</Text>
-                    <Text style={styles.additionalText}>{park}</Text>
-                </View>
+        <TouchableWithoutFeedback onPress={
+            () => {
+                Keyboard.dismiss();
+            }
+        }>
+            <View style={styles.containers}>
+                <BackButton />
+                <View style={styles.reservation}>
+                    <Text style={styles.confirmationText}>Confirmation</Text>
+                    <Text style={styles.headerText}>{name}</Text>
+                    <View style={styles.header}>
+                        <Text style={styles.additionalText1}>{lable}</Text>
+                        <Text style={styles.additionalText}>{park}</Text>
+                    </View>
 
-                <View style={styles.container}>
-                    <TextInput
-                        style={styles.field}
-                        placeholder="Enter your phone number (+358)"
-                        keyboardType="phone-pad"
-                        value={phoneNumber}
-                        onChangeText={handlePhoneNumberChange}
-                    />
+                    <View style={styles.container}>
+                        <TextInput
+                            style={styles.field}
+                            placeholder="Enter your phone number (+358)"
+                            keyboardType="phone-pad"
+                            value={phoneNumber}
+                            onChangeText={handlePhoneNumberChange}
+                        />
 
-                    <TouchableOpacity
-                        style={styles.continueButton}
-                        onPress={handleContinuePress}
-                        disabled={!phoneNumber}
-                    >
-                        <Text style={styles.buttonText}>Continue</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.continueButton}
+                            onPress={handleContinuePress}
+                            disabled={!phoneNumber}
+                        >
+                            <Text style={styles.buttonText}>Continue</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 

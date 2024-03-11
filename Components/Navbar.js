@@ -12,7 +12,7 @@ const iconData = [
 
 const screenMapping = {
     "home-outline": "Map",
-    "car-sport-outline": "SearchPage",
+    "car-sport-outline": "SearchScreen",
     "settings-outline": "Map",
     "person-outline": "Map",
 };

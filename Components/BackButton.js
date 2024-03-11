@@ -20,8 +20,8 @@ function BackButton() {
 const styles = StyleSheet.create({
     backButton: {
         position: "absolute",
-        top: 80,
-        left: 40,
+        top: 60,
+        left: 20,
         zIndex:10000
     }
 });
