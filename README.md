@@ -118,11 +118,11 @@ The project includes a Jenkinsfile for continuous integration and deployment. Th
 4. Deploy Application: Pushes the Docker image to the specified Docker Hub repository.
 
 ## Project Structure
-### backend:## Contains the Node.js backend application.
-### frontend:## Contains the React Native mobile app.
-### Jenkinsfile:## Defines the Jenkins CI/CD pipeline.
-### .dockerignore:## Specifies files and directories to be excluded during Docker image build.
-### .gitignore:## Specifies files and directories to be ignored by Git.
+### backend: Contains the Node.js backend application.
+### frontend: Contains the React Native mobile app.
+### Jenkinsfile: Defines the Jenkins CI/CD pipeline.
+### .dockerignore: Specifies files and directories to be excluded during Docker image build.
+### .gitignore: Specifies files and directories to be ignored by Git.
 
 ## Database Configuration
 The backend uses a MySQL database. Configure your database connection in the config/db.js file.
