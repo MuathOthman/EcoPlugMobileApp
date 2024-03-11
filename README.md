@@ -20,7 +20,6 @@ Our goal is to create an easy-to-use and efficient system that enhances the smoo
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
 - [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
 - [License](#license)
 
 ## Installation
