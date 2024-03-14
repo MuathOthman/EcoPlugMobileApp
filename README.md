@@ -2,8 +2,7 @@
 
 ## Description
 
-This is the Frontend for the EcoPlug and here is the Backend side of the EcoPLug : [Frontend_EcoPlug](https://github.com/MuathOthman/EcoPlugMobileApp)
-
+This is the Frontend for the EcoPlug and here is the Backend side of the EcoPLug : [Backend EcoPlug](https://github.com/MuathOthman/EcoPlugBackend)
 
 ### Vision
 At EcoPlug, our vision is to simplify the lives of electric vehicle (EV) owners by providing real-time monitoring of charging point availability. We understand the challenges that come with EV charging today, with uncertainty around the availability of charging points often leading to long wait times or complications with reserved points.
