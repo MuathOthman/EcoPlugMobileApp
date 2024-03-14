@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import BakcButton from "../Components/BackButton";
+
+// Your component code...
+
 
 export default function CodeConfirmScreen() {
     const route = useRoute();
     const navigator = useNavigation();
     const [latausID, setLatausID] = useState();
+    const [loading, setLoading] = useState(false); // Add loading state
     const { park, lable, name, id, phoneNumber, latauspisteID, sahkonhinta } = route.params;
     const [verificationCode, setVerificationCode] = useState('');
     const inputs = useRef(Array.from({ length: 4 }, () => React.createRef()));
@@ -87,40 +90,48 @@ export default function CodeConfirmScreen() {
     };
 
     return (
-        <View style={styles.containers}>
-            <View style={styles.codeConfirm}>
-                <Text style={styles.confirmationText}>Confirmation</Text>
-                <Text style={styles.headerText}>{name}</Text>
-                <View style={styles.header}>
-                    <Text style={styles.additionalText1}>{lable}</Text>
-                    <Text style={styles.additionalText}>{park}</Text>
-                </View>
-                <Text style={styles.verificationText}>Verification code was sent to</Text>
-                <Text style={styles.phoneNumber}>{phoneNumber}</Text>
-                <View style={styles.codeInputContainer}>
-                    {[0, 1, 2, 3].map((index) => (
-                        <TextInput
-                            key={index}
-                            ref={inputs.current[index]}
-                            style={styles.codeInput}
-                            maxLength={1}
-                            value={verificationCode[index]}
-                            onChangeText={(value) => handleCodeChange(index, value)}
-                            onKeyPress={(event) => handleBackspace(index, event)}
-                        />
-                    ))}
-                </View>
+        <TouchableWithoutFeedback onPress={
+            () => {
+                Keyboard.dismiss();
+            }
+        }>
+            <View style={styles.containers}>
+                    <View style={styles.codeConfirm}>
+                        <Text style={styles.confirmationText}>Confirmation</Text>
+                        <Text style={styles.headerText}>{name}</Text>
+                        <View style={styles.header}>
+                            <Text style={styles.additionalText1}>{lable}</Text>
+                            <Text style={styles.additionalText}>{park}</Text>
+                        </View>
+                        <Text style={styles.verificationText}>Verification code was sent to</Text>
+                        <Text style={styles.phoneNumber}>{phoneNumber}</Text>
+                        <View style={styles.codeInputContainer}>
+                            {[0, 1, 2, 3].map((index) => (
+                                <TextInput
+                                    key={index}
+                                    ref={inputs.current[index]}
+                                    style={styles.codeInput}
+                                    maxLength={1}
+                                    value={verificationCode[index]}
+                                    keyboardType="phone-pad"
+                                    onChangeText={(value) => handleCodeChange(index, value)}
+                                    onKeyPress={(event) => handleBackspace(index, event)}
+                                />
+                            ))}
+                        </View>
 
-                <TouchableOpacity
-                    style={styles.continueButton}
-                    onPress={handleContinuePress}
-                    disabled={verificationCode.length < 4}
-                >
-                    <Text style={styles.buttonText}>START CHARGING</Text>
-                </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.continueButton}
+                            onPress={handleContinuePress}
+                            disabled={verificationCode.length < 4}
+                        >
+                            <Text style={styles.buttonText}>START CHARGING</Text>
+                        </TouchableOpacity>
+                    </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
+
 }
 
 const styles = StyleSheet.create({

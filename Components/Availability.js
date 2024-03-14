@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         width: "100%",
         height: "55%",
-        borderRadius: 50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
     },
     closeButton: {
         position: "absolute",

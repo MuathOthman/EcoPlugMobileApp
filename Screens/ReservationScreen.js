@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     field: {
         position: 'absolute',
         padding: 20,
-        width: 375,
+        width: 345,
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 20,

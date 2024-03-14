@@ -31,7 +31,7 @@ export default function ParkingScreen() {
 
         if (parking) {
             const textColor = parking.tila === 0 ? 'green' : 'red';
-            const parkingTypeLabel = colIndex === 0 ? 'Availability 2' : 'CCS';
+            const parkingTypeLabel = colIndex === 0 ? 'Type 2' : 'CCS';
 
             const handlePress = () => {
                 if (parking.tila !== 1) {
