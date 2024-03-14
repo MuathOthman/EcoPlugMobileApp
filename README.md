@@ -90,7 +90,6 @@ Upon launching the EcoPlug application, users are warmly welcomed with our logo 
 - **Redux**: A predictable state container for managing application state.
 - **React Navigation**: A routing and navigation library for React Native.
 - **Axios**: A promise-based HTTP client for making API requests.
-- **[Other libraries/frameworks used]**: [Brief description of other technologies used in your project]
 
 ## Contributing
 We welcome contributions to EcoPlug! If you would like to contribute, please follow these steps:
