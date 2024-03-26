@@ -1,5 +1,5 @@
 # Use an official Node runtime as a base image
-FROM node:14-alpine
+FROM node:14
 
 # Set the working directory in the container
 WORKDIR /
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 4000
 
 # Start the app
 CMD ["npm", "start"]
