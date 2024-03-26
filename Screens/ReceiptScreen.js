@@ -26,7 +26,7 @@ export default function ReceiptScreen({ route }) {
                 <Text style={styles.totalcosttext}>{totalCost} €</Text>
             </View>
             <TouchableOpacity style={styles.StopChargingButton} onPress={handleClosePress}>
-                <Text style={styles.buttonText}>Close</Text>
+                <Text style={styles.buttonText}>{t('Close')}</Text>
             </TouchableOpacity>
         </View>
     );

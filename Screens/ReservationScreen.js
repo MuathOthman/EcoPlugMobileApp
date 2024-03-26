@@ -51,7 +51,7 @@ export default function ReservationScreen() {
             <View style={styles.containers}>
                 <BackButton />
                 <View style={styles.reservation}>
-                    <Text style={styles.confirmationText}>Confirmation</Text>
+                    <Text style={styles.confirmationText}>{t('Confirmation')}</Text>
                     <Text style={styles.headerText}>{name}</Text>
                     <View style={styles.header}>
                         <Text style={styles.additionalText1}>{lable}</Text>
@@ -61,7 +61,7 @@ export default function ReservationScreen() {
                     <View style={styles.container}>
                         <TextInput
                             style={styles.field}
-                            placeholder="Enter your phone number (+358)"
+                            placeholder={t('EnterPhoneNumber')}
                             keyboardType="phone-pad"
                             value={phoneNumber}
                             onChangeText={handlePhoneNumberChange}
@@ -72,7 +72,7 @@ export default function ReservationScreen() {
                             onPress={handleContinuePress}
                             disabled={!phoneNumber}
                         >
-                            <Text style={styles.buttonText}>Continue</Text>
+                            <Text style={styles.buttonText}>{t('Continue')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

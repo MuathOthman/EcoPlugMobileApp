@@ -43,12 +43,12 @@ export default function SearchScreen() {
             <BackButton />
             <ScrollView style={styles.scrollContainer}>
                 <View style={styles.innerContainer}>
-                    <Text style={styles.text}>Charging Stations</Text>
+                    <Text style={styles.text}>{t('ChargingStations')}</Text>
                     <TextInput
                         autoFocus={true}
                         style={styles.field}
                         value={search}
-                        placeholder="Search for charging stations"
+                        placeholder={t('SearchChargingStations')}
                         onChangeText={handleSearch}
                     />
                     {filteredLocations.map((loc, index) => (
