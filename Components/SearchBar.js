@@ -7,7 +7,7 @@ export default function Navbar() {
             <View style={{ justifyContent: "space-between"}}>
                 <TextInput
                     style={{height: 50, width: "100%"}}
-                    placeholder="Search"
+                    placeholder={t('Search')}
                 />
             </View>
         </View>

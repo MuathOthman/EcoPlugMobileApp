@@ -15,14 +15,14 @@ export default function ReceiptScreen({ route }) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.title}>Receipt</Text>
+                <Text style={styles.title}>{t('Receipt')}</Text>
             </View>
             <View style={styles.chargingtime}>
-                <Text style={styles.text}>Charging Time</Text>
-                <Text style={styles.chargingtime2}>{chargingTime} min</Text>
+                <Text style={styles.text}>{t('ChargingTime')}</Text>
+                <Text style={styles.chargingtime2}>{chargingTime} {t('Minutes')}</Text>
             </View>
             <View style={styles.box}>
-                <Text style={styles.text}>Total Cost</Text>
+                <Text style={styles.text}>{t('TotalCostReceipts')}</Text>
                 <Text style={styles.totalcosttext}>{totalCost} €</Text>
             </View>
             <TouchableOpacity style={styles.StopChargingButton} onPress={handleClosePress}>

@@ -68,7 +68,7 @@ export default function ParkingScreen() {
     return (
         <View style={styles.container}>
             <BackButton />
-            <Text style={styles.subText}>CHOOSE AVAILABLE PARKING</Text>
+            <Text style={styles.subText}>{t('AvailableParking')}</Text>
             <View style={styles.tableContainer}>
                 {[...Array(9)].map((_, rowIndex) => (
                     <React.Fragment key={rowIndex}>

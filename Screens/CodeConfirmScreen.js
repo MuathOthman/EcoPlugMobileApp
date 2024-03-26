@@ -97,13 +97,13 @@ export default function CodeConfirmScreen() {
         }>
             <View style={styles.containers}>
                     <View style={styles.codeConfirm}>
-                        <Text style={styles.confirmationText}>Confirmation</Text>
+                        <Text style={styles.confirmationText}>{t('Confirmation')}</Text>
                         <Text style={styles.headerText}>{name}</Text>
                         <View style={styles.header}>
                             <Text style={styles.additionalText1}>{lable}</Text>
                             <Text style={styles.additionalText}>{park}</Text>
                         </View>
-                        <Text style={styles.verificationText}>Verification code was sent to</Text>
+                        <Text style={styles.verificationText}>{t('VerificationSent')}</Text>
                         <Text style={styles.phoneNumber}>{phoneNumber}</Text>
                         <View style={styles.codeInputContainer}>
                             {[0, 1, 2, 3].map((index) => (
@@ -125,7 +125,7 @@ export default function CodeConfirmScreen() {
                             onPress={handleContinuePress}
                             disabled={verificationCode.length < 4}
                         >
-                            <Text style={styles.buttonText}>START CHARGING</Text>
+                            <Text style={styles.buttonText}>{t('StartCharging')}</Text>
                         </TouchableOpacity>
                     </View>
             </View>

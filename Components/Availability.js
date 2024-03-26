@@ -45,7 +45,7 @@ export default function Availability({ id, name, address, postalCode, city, setI
             </TouchableOpacity>
             <Text style={styles.headerText}>{name}</Text>
             <Text style={styles.header2Text}>{`${address} ${postalCode} ${city}`}</Text>
-            <Text style={styles.header3Text}>Available Charging Stations</Text>
+            <Text style={styles.header3Text}>{t('Availability')}</Text>
             <View style={styles.innerContainer}>
                 <Icon name="charging-station" size={windowWidth * 0.2} color="black" />
                 <Text style={[styles.countnumber, { color: countTextColor }]}>{freeCount}</Text>

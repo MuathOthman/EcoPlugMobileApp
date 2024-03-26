@@ -173,7 +173,7 @@ export default function ChargingScreen() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>CHARGING</Text>
+            <Text style={styles.text}>{t('CHARGING')}</Text>
             <View style={styles.whiteBox}>
                 <Text style={styles.nameText}>{lable}</Text>
                 <Text style={styles.name1Text}>{park}</Text>
@@ -192,21 +192,21 @@ export default function ChargingScreen() {
                     <Text style={styles.circleText}>{`${randomPercentage}%`}</Text>
                     <Text style={styles.additionalText}>{`${sahkonhinta * 100}kW`}</Text>
                 </View>
-                <Text style={styles.bottomText}>YOUR CAR IS BEING CHARGED</Text>
+                <Text style={styles.bottomText}>{t('BeingCharged')}</Text>
             </View>
             <View style={styles.smallBoxesContainer}>
                 <View style={styles.smallBox1}>
                     <Text style={styles.smallBoxText}>{formatTime(chargingTime)}</Text>
-                    <Text style={styles.smallBox1SubText}>CHARGING TIME SINCE STARTED</Text>
+                    <Text style={styles.smallBox1SubText}>{t('SinceStarted')}</Text>
                 </View>
                 <View style={styles.separator} />
                 <View style={styles.smallBox2}>
                     <Text style={styles.smallBox2Text}>{totalCost ? `${totalCost}€` : '0€'}</Text>
-                    <Text style={styles.smallBox2SubText}>TOTAL COST ACCURED CHARGE</Text>
+                    <Text style={styles.smallBox2SubText}>{t('TotalCost')}</Text>
                 </View>
             </View>
             <TouchableOpacity style={styles.StopChargingButton} onPress={stopCharging}>
-                <Text style={styles.buttonText}>STOP CHARGING</Text>
+                <Text style={styles.buttonText}>{t('STOPCHARGING')}</Text>
             </TouchableOpacity>
             <ConfirmationPopup
                 visible={isConfirmationModalVisible}

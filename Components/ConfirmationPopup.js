@@ -11,13 +11,13 @@ const ConfirmationPopup = ({ visible, onConfirm, onCancel }) => {
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <Text style={styles.modalText}>Are you sure you want to stop charging?</Text>
+                    <Text style={styles.modalText}>{t('StopAsk')}</Text>
                     <View style={styles.modalButtonsContainer}>
                         <TouchableOpacity style={styles.modalButton} onPress={onConfirm}>
-                            <Text style={styles.modalButtonText}>Yes</Text>
+                            <Text style={styles.modalButtonText}>{t('Yes')}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.modalButton} onPress={onCancel}>
-                            <Text style={styles.modalButtonText}>No</Text>
+                            <Text style={styles.modalButtonText}>{t('No')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
