@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import BackButton from "../Components/BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
+
 
 export default function ReservationScreen() {
+    const { t } = useTranslation();
     const navigator = useNavigation();
     const route = useRoute();
     const { park, lable, name, id, latauspisteID, sahkonhinta } = route.params;
@@ -17,7 +20,7 @@ export default function ReservationScreen() {
         try {
             console.log('Phone Number:', phoneNumber);
 
-            const response = await fetch('http://172.20.10.7:3002/otp/send-otp', {
+            const response = await fetch('http://localhost:3002/otp/send-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import BackButton from '../Components/BackButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Availability from "../Components/Availability";
+import { useTranslation } from 'react-i18next';
 
 export default function ParkingScreen() {
+    const { t } = useTranslation();
     const navigation = useNavigation();
     const route = useRoute();
     const { id, name } = route.params;
@@ -13,7 +14,7 @@ export default function ParkingScreen() {
     useEffect(() => {
         const fetchParkings = async () => {
             try {
-                const response = await fetch(`http://172.20.10.7:3002/sijainnit/parkings/${id}`);
+                const response = await fetch(`http://localhost:3002/sijainnit/parkings/${id}`);
                 const data = await response.json();
                 setParkings(data);
                 console.log(data);

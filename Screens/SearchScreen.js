@@ -3,16 +3,22 @@ import { StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import BackButton from "../Components/BackButton";
 import PlugLocation from "../Components/PlugLocation";
+import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
+
 
 export default function SearchScreen() {
+    const { t } = useTranslation();
     const [locations, setLocations] = useState([]);
     const [search, setSearch] = useState("");
     const [filteredLocations, setFilteredLocations] = useState([]);
 
     const navigation = useNavigation();
 
+    const textAlign = i18n.dir() === 'rtl' ? { textAlign: 'right' } : { textAlign: 'left' };
+
     useEffect(() => {
-        fetch("http://172.20.10.7:3002/sijainnit")
+        fetch("http://localhost:3002/sijainnit")
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -46,7 +52,7 @@ export default function SearchScreen() {
                     <Text style={styles.text}>{t('ChargingStations')}</Text>
                     <TextInput
                         autoFocus={true}
-                        style={styles.field}
+                        style={[styles.field, textAlign]}
                         value={search}
                         placeholder={t('SearchChargingStations')}
                         onChangeText={handleSearch}

@@ -4,9 +4,6 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 
 export default function PlugSpace({ selectedLocation }) {
     const [freeCount, setFreeCount] = useState(0);
-
-
-
     return (
         <View style={styles.innerContainer}>
             <Icon name="charging-station" size={45} color="black" />

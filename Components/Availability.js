@@ -2,17 +2,21 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Icon from "react-native-vector-icons/FontAwesome6";
+import { useTranslation } from 'react-i18next';
+
+
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function Availability({ id, name, address, postalCode, city, setIsVisible }) {
+    const { t } = useTranslation();
     const navigation = useNavigation();
     const [freeCount, setFreeCount] = useState(0);
 
     useEffect(() => {
         const fetchFreeCount = async () => {
             try {
-                const response = await fetch(`http://172.20.10.7:3002/sijainnit/specific/${id}`);
+                const response = await fetch(`http://localhost:3002/sijainnit/specific/${id}`);
                 const data = await response.json();
                 setFreeCount(data[0].count);
             } catch (error) {

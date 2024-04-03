@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
-
-// Your component code...
+import { useTranslation } from 'react-i18next';
 
 
 export default function CodeConfirmScreen() {
+    const { t } = useTranslation();
     const route = useRoute();
     const navigator = useNavigation();
     const [latausID, setLatausID] = useState();
@@ -37,7 +37,7 @@ export default function CodeConfirmScreen() {
     };
 
     const reserveParkingSpot = () => {
-        fetch(`http://172.20.10.7:3002/sijainnit/reserve/${latauspisteID}`, {
+        fetch(`http://localhost:3002/sijainnit/reserve/${latauspisteID}`, {
             method: 'POST',
         })
             .then(response => response.json())
@@ -57,7 +57,7 @@ export default function CodeConfirmScreen() {
 
         reserveParkingSpot();
 
-        fetch('http://172.20.10.7:3002/otp/verify-otp', {
+        fetch('http://localhost:3002/otp/verify-otp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

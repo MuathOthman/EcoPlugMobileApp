@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import { useTranslation } from 'react-i18next';
+
 
 export default function PlugLocation({ name, address, postalCode, city, onPress }) {
     return (

@@ -1,7 +1,10 @@
 import React from "react";
 import {StyleSheet,Text, View, TextInput} from "react-native";
+import { useTranslation } from 'react-i18next';
+
 
 export default function Navbar() {
+    const { t } = useTranslation();
     return (
         <View style={styles.container}>
             <View style={{ justifyContent: "space-between"}}>

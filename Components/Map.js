@@ -5,8 +5,11 @@ import * as Location from 'expo-location';
 import Availability from "./Availability";
 import Navbar from "./Navbar";
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
+
 
 export default function Map() {
+    const { t } = useTranslation();
     const mapRef = useRef(null);
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [locations, setLocations] = useState([]);
@@ -32,7 +35,7 @@ export default function Map() {
     };
 
     useEffect(() => {
-        fetch("http://172.20.10.7:3002/sijainnit")
+        fetch("http://localhost:3002/sijainnit")
             .then(response => response.json())
             .then(data => setLocations(data))
             .catch(error => console.error("Failed to fetch location data:", error));

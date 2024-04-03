@@ -1,7 +1,10 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
+
 
 const ConfirmationPopup = ({ visible, onConfirm, onCancel }) => {
+    const { t } = useTranslation();
     return (
         <Modal
             animationType="slide"

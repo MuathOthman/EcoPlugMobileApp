@@ -2,8 +2,11 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { StyleSheet, Text } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
+
 
 export default function ReceiptScreen({ route }) {
+    const { t } = useTranslation();
     const navigation = useNavigation();
     const { chargingTime, totalCost } = route.params;
 

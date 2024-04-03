@@ -3,8 +3,11 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import ConfirmationPopup from '../Components/ConfirmationPopup';
+import { useTranslation } from 'react-i18next';
+
 
 export default function ChargingScreen() {
+    const { t } = useTranslation();
     const route = useRoute();
     const navigator = useNavigation();
     const { park, lable, latauspisteID, phoneNumber, sahkonhinta } = route.params;
@@ -18,7 +21,7 @@ export default function ChargingScreen() {
     useEffect(() => {
         const fetchLatausID = async () => {
             try {
-                const response = await fetch('http://172.20.10.7:3002/user/get-user', {
+                const response = await fetch('http://localhost:3002/user/get-user', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -73,7 +76,7 @@ export default function ChargingScreen() {
 
     const setReserved = (fetchedLatausID) => {
         if (fetchedLatausID) {
-            fetch('http://172.20.10.7:3002/charging/start-charging', {
+            fetch('http://localhost:3002/charging/start-charging', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -116,7 +119,7 @@ export default function ChargingScreen() {
         try {
             const chargingTimeInMinutes = Math.floor(chargingTime / 60);
 
-            await fetch('http://172.20.10.7:3002/user/update-user', {
+            await fetch('http://localhost:3002/user/update-user', {
              method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -129,7 +132,7 @@ export default function ChargingScreen() {
                }),
              });
 
-            await fetch('http://172.20.10.7:3002/user/free-latauspiste', {
+            await fetch('http://localhost:3002/user/free-latauspiste', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

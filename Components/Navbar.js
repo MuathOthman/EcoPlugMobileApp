@@ -2,6 +2,8 @@ import React, { useState, useCallback } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
+
 
 const iconData = [
     { name: "home-outline" },
@@ -18,6 +20,7 @@ const screenMapping = {
 };
 
 export default function Navbar() {
+    const { t } = useTranslation();
     const navigation = useNavigation();
     const [activeIcon, setActiveIcon] = useState(0);
 
