@@ -37,7 +37,7 @@ export default function CodeConfirmScreen() {
     };
 
     const reserveParkingSpot = () => {
-        fetch(`http://localhost:3002/sijainnit/reserve/${latauspisteID}`, {
+        fetch(`http://localhost:3000/sijainnit/reserve/${latauspisteID}`, {
             method: 'POST',
         })
             .then(response => response.json())
@@ -57,7 +57,7 @@ export default function CodeConfirmScreen() {
 
         reserveParkingSpot();
 
-        fetch('http://localhost:3002/otp/verify-otp', {
+        fetch('http://localhost:3000/otp/verify-otp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ export default function ReservationScreen() {
         try {
             console.log('Phone Number:', phoneNumber);
 
-            const response = await fetch('http://localhost:3002/otp/send-otp', {
+            const response = await fetch('http://localhost:3000/otp/send-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

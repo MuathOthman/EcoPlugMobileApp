@@ -16,7 +16,7 @@ export default function Availability({ id, name, address, postalCode, city, setI
     useEffect(() => {
         const fetchFreeCount = async () => {
             try {
-                const response = await fetch(`http://localhost:3002/sijainnit/specific/${id}`);
+                const response = await fetch(`http://localhost:3000/sijainnit/specific/${id}`);
                 const data = await response.json();
                 setFreeCount(data[0].count);
             } catch (error) {
@@ -55,7 +55,7 @@ export default function Availability({ id, name, address, postalCode, city, setI
                 <Text style={[styles.countnumber, { color: countTextColor }]}>{freeCount}</Text>
             </View>
             <TouchableOpacity style={styles.stopChargingButton} onPress={handleButtonPress}>
-                <Text style={styles.buttonText}>CONTINUE</Text>
+                <Text style={styles.buttonText}>{t('Continue')}</Text>
             </TouchableOpacity>
         </View>
     );

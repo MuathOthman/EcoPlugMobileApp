@@ -35,7 +35,7 @@ export default function Map() {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3002/sijainnit")
+        fetch("http://localhost:3000/sijainnit")
             .then(response => response.json())
             .then(data => setLocations(data))
             .catch(error => console.error("Failed to fetch location data:", error));
