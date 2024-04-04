@@ -104,8 +104,11 @@ const styles = StyleSheet.create({
         zIndex: 110,
         fontSize: windowWidth * 0.07,
         fontWeight: "bold",
-        marginLeft: windowWidth * 0.05,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
         marginBottom: windowWidth * 0.05,
+
     },
     stopChargingButton: {
         backgroundColor: 'black',
