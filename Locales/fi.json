@@ -18,8 +18,8 @@
   "Minutes": "Min",
   "TotalCostReceipts": "Latauksen kokonaishinta",
   "Close": "Sulje",
-  "EnterPhonenumber": "Syötä puhelinnumero (+358)",
-  "Continue": "Jatka",
+  "EnterPhoneNumber": "Syötä puhelinnumero (+358)",
+  "Continue": "JATKA",
   "ChargingStations": "Latausasemat",
   "SearchChargingStations": "Etsi lähin latauspiste"
 }

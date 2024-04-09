@@ -18,7 +18,7 @@ export default function SearchScreen() {
     const textAlign = i18n.dir() === 'rtl' ? { textAlign: 'right' } : { textAlign: 'left' };
 
     useEffect(() => {
-        fetch("http://localhost:3002/sijainnit")
+        fetch("http://localhost:3000/sijainnit")
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

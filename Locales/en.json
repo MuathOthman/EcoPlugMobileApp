@@ -18,8 +18,8 @@
   "Minutes": "Min",
   "TotalCostReceipts": "Total Cost",
   "Close": "Close",
-  "EnterPhonenumber": "Enter your phone number (+358)",
-  "Continue": "Continue",
+  "EnterPhoneNumber": "Enter your phone number (+358)",
+  "Continue": "CONTINUE",
   "ChargingStations": "Charging Stations",
   "SearchChargingStations": "Search for charging stations"
 }

@@ -20,7 +20,7 @@ export default function Availability({ id, name, address, postalCode, city, setI
     useEffect(() => {
         const fetchFreeCount = async () => {
             try {
-                const response = await fetch(`http://localhost:3002/sijainnit/specific/${id}`);
+                const response = await fetch(`http://localhost:3000/sijainnit/specific/${id}`);
                 const data = await response.json();
                 setFreeCount(data[0].count);
             } catch (error) {
@@ -108,8 +108,11 @@ const styles = StyleSheet.create({
         zIndex: 110,
         fontSize: windowWidth * 0.07,
         fontWeight: "bold",
-        marginLeft: windowWidth * 0.05,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
         marginBottom: windowWidth * 0.05,
+
     },
     stopChargingButton: {
         backgroundColor: 'black',
