@@ -5,6 +5,14 @@ export default function WelcomeScreen() {
     const fadeAnim = useRef(new Animated.Value(1)).current;
 
     useEffect(() => {
+        const setLanguage = async () => {
+            try {
+                const response = await fetch("http://localhost:3002/language");
+                const data = await response.json();
+            } catch (error) {
+                console.error("Failed to fetch language:", error);
+            }
+        }
         const timer = setTimeout(() => {
             Animated.timing(fadeAnim, {
                 toValue: 0,

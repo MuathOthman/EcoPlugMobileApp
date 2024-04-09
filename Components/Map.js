@@ -6,6 +6,7 @@ import Availability from "./Availability";
 import Navbar from "./Navbar";
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import il8n from "../il8n";
 
 
 export default function Map() {
@@ -35,11 +36,19 @@ export default function Map() {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3002/sijainnit")
+        const language = il8n.language;
+        console.log('Language:', language);
+        fetch(`http://localhost:3002/sijainnit/${language}`, {
+            method: 'POST',
+        })
             .then(response => response.json())
-            .then(data => setLocations(data))
-            .catch(error => console.error("Failed to fetch location data:", error));
+            .then(data => {
+                console.log('Locations:', data);
+                setLocations(data);
+            })
+            .catch(error => console.error('Failed to reserve locations:', error));
     }, []);
+
 
     useEffect(() => {
         (async () => {

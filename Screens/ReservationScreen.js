@@ -64,7 +64,7 @@ export default function ReservationScreen() {
                     <View style={styles.container}>
                         <TextInput
                             style={styles.field}
-                            placeholder={t('EnterPhoneNumber')}
+                            placeholder={t('EnterPhonenumber')}
                             keyboardType="phone-pad"
                             value={phoneNumber}
                             onChangeText={handlePhoneNumberChange}

@@ -3,15 +3,19 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-nati
 import { useNavigation } from '@react-navigation/native';
 import Icon from "react-native-vector-icons/FontAwesome6";
 import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 
 
 const windowWidth = Dimensions.get('window').width;
-
 export default function Availability({ id, name, address, postalCode, city, setIsVisible }) {
     const { t } = useTranslation();
     const navigation = useNavigation();
     const [freeCount, setFreeCount] = useState(0);
+
+    const textAlign = i18n.dir() === 'rtl' ? { textAlign: 'right', marginRight: windowWidth * 0.05 } : { textAlign: 'left' };
+    const buttonAlign = i18n.dir() === 'rtl' ? { left: windowWidth * 0.05 } : { right: windowWidth * 0.05 };
+
 
     useEffect(() => {
         const fetchFreeCount = async () => {
@@ -42,20 +46,20 @@ export default function Availability({ id, name, address, postalCode, city, setI
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                style={styles.closeButton}
+                style={[styles.closeButton, buttonAlign]}
                 onPress={handleClose}
             >
-                <Text style={styles.closeButtonText}>x</Text>
+                <Text style={[styles.closeButtonText]}>x</Text>
             </TouchableOpacity>
-            <Text style={styles.headerText}>{name}</Text>
-            <Text style={styles.header2Text}>{`${address} ${postalCode} ${city}`}</Text>
+            <Text style={[styles.headerText, textAlign]}>{name}</Text>
+            <Text style={[styles.header2Text, textAlign]}>{`${address} ${postalCode} ${city}`}</Text>
             <Text style={styles.header3Text}>{t('Availability')}</Text>
             <View style={styles.innerContainer}>
                 <Icon name="charging-station" size={windowWidth * 0.2} color="black" />
                 <Text style={[styles.countnumber, { color: countTextColor }]}>{freeCount}</Text>
             </View>
             <TouchableOpacity style={styles.stopChargingButton} onPress={handleButtonPress}>
-                <Text style={styles.buttonText}>CONTINUE</Text>
+                <Text style={styles.buttonText}>{t('Continue')}</Text>
             </TouchableOpacity>
         </View>
     );
@@ -77,7 +81,6 @@ const styles = StyleSheet.create({
         position: "absolute",
         borderRadius: 20,
         top: windowWidth * 0.02,
-        right: windowWidth * 0.05,
         padding: windowWidth * 0.02,
     },
     closeButtonText: {
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
         marginBottom: windowWidth * 0.15,
     },
     header3Text: {
+        textAlign: 'center',
         zIndex: 110,
         fontSize: windowWidth * 0.07,
         fontWeight: "bold",

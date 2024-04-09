@@ -35,7 +35,6 @@ export default function CodeConfirmScreen() {
             }
         }
     };
-
     const reserveParkingSpot = () => {
         fetch(`http://localhost:3002/sijainnit/reserve/${latauspisteID}`, {
             method: 'POST',
