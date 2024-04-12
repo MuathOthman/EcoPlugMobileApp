@@ -14,7 +14,7 @@ export default function ParkingScreen() {
     useEffect(() => {
         const fetchParkings = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/sijainnit/parkings/${id}`);
+                const response = await fetch(`http://localhost:3002/sijainnit/parkings/${id}`);
                 const data = await response.json();
                 setParkings(data);
                 console.log(data);

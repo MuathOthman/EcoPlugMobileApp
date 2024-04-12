@@ -34,9 +34,15 @@ export default function Map() {
         };
         mapRef.current?.animateToRegion(newRegion, 1000);
     };
-
     useEffect(() => {
-        const language = il8n.language;
+        let language = "en";
+        if (il8n.language === 'fi') {
+            language = 'fi';
+        } else if (il8n.language === 'ar') {
+            language = 'ar';
+        } else {
+            language = 'en';
+        }
         console.log('Language:', language);
         fetch(`http://localhost:3002/sijainnit/${language}`, {
             method: 'POST',
@@ -48,7 +54,6 @@ export default function Map() {
             })
             .catch(error => console.error('Failed to reserve locations:', error));
     }, []);
-
 
     useEffect(() => {
         (async () => {
@@ -66,7 +71,6 @@ export default function Map() {
             }));
         })();
     }, []);
-
     return (
         <View style={styles.container}>
             <MapView

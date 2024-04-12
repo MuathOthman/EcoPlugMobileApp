@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, TextInput, TouchableOpacity, TouchableWithoutFee
 import BackButton from "../Components/BackButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 
 export default function ReservationScreen() {
@@ -12,6 +13,9 @@ export default function ReservationScreen() {
     const { park, lable, name, id, latauspisteID, sahkonhinta } = route.params;
     const [phoneNumber, setPhoneNumber] = useState('');
 
+    const textAlign = i18n.dir() === 'rtl' ? { textAlign: 'right' } : { textAlign: 'left' };
+
+
     const handlePhoneNumberChange = (value) => {
         setPhoneNumber(value);
     };
@@ -20,7 +24,7 @@ export default function ReservationScreen() {
         try {
             console.log('Phone Number:', phoneNumber);
 
-            const response = await fetch('http://localhost:3000/otp/send-otp', {
+            const response = await fetch('http://localhost:3002/otp/send-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,8 +67,8 @@ export default function ReservationScreen() {
 
                     <View style={styles.container}>
                         <TextInput
-                            style={styles.field}
-                            placeholder={t('EnterPhonenumber')}
+                            style={[styles.field, textAlign]}
+                            placeholder={t('EnterPhoneNumber')}
                             keyboardType="phone-pad"
                             value={phoneNumber}
                             onChangeText={handlePhoneNumberChange}

@@ -20,9 +20,13 @@ export default function Availability({ id, name, address, postalCode, city, setI
     useEffect(() => {
         const fetchFreeCount = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/sijainnit/specific/${id}`);
+                const response = await fetch(`http://localhost:3002/sijainnit/specific/${id}`);
                 const data = await response.json();
-                setFreeCount(data[0].count);
+                if (i18n.dir() === 'rtl') {
+                    setFreeCount(arabicNumbers(data[0].count));
+                } else {
+                    setFreeCount(data[0].count);
+                }
             } catch (error) {
                 console.error("Failed to fetch free count:", error);
             }
@@ -31,6 +35,9 @@ export default function Availability({ id, name, address, postalCode, city, setI
         fetchFreeCount();
     }, [id]);
 
+    const arabicNumbers = (number) => {
+        return number.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    }
     const handleButtonPress = () => {
         setIsVisible(false);
         navigation.navigate('ParkingScreen', { id, name });
@@ -104,7 +111,6 @@ const styles = StyleSheet.create({
         marginBottom: windowWidth * 0.15,
     },
     header3Text: {
-        textAlign: 'center',
         zIndex: 110,
         fontSize: windowWidth * 0.07,
         fontWeight: "bold",

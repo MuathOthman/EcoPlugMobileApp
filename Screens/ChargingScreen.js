@@ -21,7 +21,7 @@ export default function ChargingScreen() {
     useEffect(() => {
         const fetchLatausID = async () => {
             try {
-                const response = await fetch('http://localhost:3000/user/get-user', {
+                const response = await fetch('http://localhost:3002/user/get-user', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function ChargingScreen() {
 
     const setReserved = (fetchedLatausID) => {
         if (fetchedLatausID) {
-            fetch('http://localhost:3000/charging/start-charging', {
+            fetch('http://localhost:3002/charging/start-charging', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ export default function ChargingScreen() {
         try {
             const chargingTimeInMinutes = Math.floor(chargingTime / 60);
 
-            await fetch('http://localhost:3000/user/update-user', {
+            await fetch('http://localhost:3002/user/update-user', {
              method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function ChargingScreen() {
                }),
              });
 
-            await fetch('http://localhost:3000/user/free-latauspiste', {
+            await fetch('http://localhost:3002/user/free-latauspiste', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
