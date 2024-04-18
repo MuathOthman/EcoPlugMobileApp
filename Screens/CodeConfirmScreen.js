@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 
 export default function CodeConfirmScreen() {
@@ -23,6 +24,13 @@ export default function CodeConfirmScreen() {
                 inputs.current[index + 1].current.focus();
             }
         }
+    };
+
+    const arabicNumbers = (number) => {
+        if (i18n.dir() === 'rtl') {
+            return number.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        }
+        return number;
     };
 
     const handleBackspace = (index, event) => {
@@ -103,7 +111,7 @@ export default function CodeConfirmScreen() {
                             <Text style={styles.additionalText}>{park}</Text>
                         </View>
                         <Text style={styles.verificationText}>{t('VerificationSent')}</Text>
-                        <Text style={styles.phoneNumber}>{phoneNumber}</Text>
+                        <Text style={styles.phoneNumber}>{arabicNumbers(phoneNumber)}</Text>
                         <View style={styles.codeInputContainer}>
                             {[0, 1, 2, 3].map((index) => (
                                 <TextInput

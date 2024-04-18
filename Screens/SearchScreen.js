@@ -5,6 +5,7 @@ import BackButton from "../Components/BackButton";
 import PlugLocation from "../Components/PlugLocation";
 import { useTranslation } from 'react-i18next';
 import i18n from "i18next";
+import il8n from "../il8n";
 
 
 export default function SearchScreen() {
@@ -18,13 +19,19 @@ export default function SearchScreen() {
     const textAlign = i18n.dir() === 'rtl' ? { textAlign: 'right' } : { textAlign: 'left' };
 
     useEffect(() => {
-        fetch("http://localhost:3002/sijainnit")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+        let language = "en";
+        if (il8n.language === 'fi') {
+            language = 'fi';
+        } else if (il8n.language === 'ar') {
+            language = 'ar';
+        } else {
+            language = 'en';
+        }
+        console.log('Language:', language);
+        fetch(`http://localhost:3002/sijainnit/${language}`, {
+            method: 'POST',
+        })
+            .then(response => response.json())
             .then(data => setLocations(data))
             .catch(error => console.error("Failed to fetch location data:", error));
     }, []);

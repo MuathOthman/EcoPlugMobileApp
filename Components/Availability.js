@@ -36,8 +36,12 @@ export default function Availability({ id, name, address, postalCode, city, setI
     }, [id]);
 
     const arabicNumbers = (number) => {
-        return number.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-    }
+        if (i18n.dir() === 'rtl') {
+            return number.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        }
+        return number;
+    };
+
     const handleButtonPress = () => {
         setIsVisible(false);
         navigation.navigate('ParkingScreen', { id, name });

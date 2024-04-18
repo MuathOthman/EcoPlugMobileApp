@@ -3,12 +3,20 @@ import { TouchableOpacity, View } from 'react-native';
 import { StyleSheet, Text } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 
 export default function ReceiptScreen({ route }) {
     const { t } = useTranslation();
     const navigation = useNavigation();
     const { chargingTime, totalCost } = route.params;
+
+    const arabicNumbers = (number) => {
+        if (i18n.dir() === 'rtl') {
+            return number.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        }
+        return number;
+    };
 
     const handleClosePress = () => {
         navigation.navigate('Map');
@@ -22,11 +30,11 @@ export default function ReceiptScreen({ route }) {
             </View>
             <View style={styles.chargingtime}>
                 <Text style={styles.text}>{t('ChargingTime')}</Text>
-                <Text style={styles.chargingtime2}>{chargingTime} {t('Minutes')}</Text>
+                <Text style={styles.chargingtime2}>{arabicNumbers(chargingTime)} {t('Minutes')}</Text>
             </View>
             <View style={styles.box}>
                 <Text style={styles.text}>{t('TotalCostReceipts')}</Text>
-                <Text style={styles.totalcosttext}>{totalCost} €</Text>
+                <Text style={styles.totalcosttext}>{arabicNumbers(totalCost)} €</Text>
             </View>
             <TouchableOpacity style={styles.StopChargingButton} onPress={handleClosePress}>
                 <Text style={styles.buttonText}>{t('Close')}</Text>

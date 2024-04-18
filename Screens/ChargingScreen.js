@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import ConfirmationPopup from '../Components/ConfirmationPopup';
 import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 
 export default function ChargingScreen() {
@@ -11,12 +12,12 @@ export default function ChargingScreen() {
     const route = useRoute();
     const navigator = useNavigation();
     const { park, lable, latauspisteID, phoneNumber, sahkonhinta } = route.params;
-
     const [latausID, setLatausID] = useState(null);
     const [chargingTime, setChargingTime] = useState(0);
     const [totalCost, setTotalCost] = useState(0);
     const [randomPercentage, setRandomPercentage] = useState(0);
     const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
+    const textAlign = i18n.dir() === 'rtl' ? { textAlign: 'right', marginRight: 10 } : { textAlign: 'left' };
 
     useEffect(() => {
         const fetchLatausID = async () => {
@@ -72,7 +73,12 @@ export default function ChargingScreen() {
         fetchLatausID();
     }, [phoneNumber, sahkonhinta]);
 
-
+    const arabicNumbers = (number) => {
+        if (i18n.dir() === 'rtl') {
+            return number.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        }
+        return number;
+    };
 
     const setReserved = (fetchedLatausID) => {
         if (fetchedLatausID) {
@@ -192,20 +198,20 @@ export default function ChargingScreen() {
                         ]}
                     />
                     <Ionicons name="flash-sharp" size={40} color="black" style={styles.lightningIcon} />
-                    <Text style={styles.circleText}>{`${randomPercentage}%`}</Text>
-                    <Text style={styles.additionalText}>{`${sahkonhinta * 100}kW`}</Text>
+                    <Text style={styles.circleText}>{`${arabicNumbers(randomPercentage)}%`}</Text>
+                    <Text style={styles.additionalText}>{`${arabicNumbers(sahkonhinta * 100)}kW`}</Text>
                 </View>
                 <Text style={styles.bottomText}>{t('BeingCharged')}</Text>
             </View>
             <View style={styles.smallBoxesContainer}>
                 <View style={styles.smallBox1}>
-                    <Text style={styles.smallBoxText}>{formatTime(chargingTime)}</Text>
-                    <Text style={styles.smallBox1SubText}>{t('SinceStarted')}</Text>
+                    <Text style={styles.smallBoxText}>{arabicNumbers(formatTime(chargingTime))}</Text>
+                    <Text style={[styles.smallBox1SubText, textAlign]}>{t('SinceStarted')}</Text>
                 </View>
                 <View style={styles.separator} />
                 <View style={styles.smallBox2}>
-                    <Text style={styles.smallBox2Text}>{totalCost ? `${totalCost}€` : '0€'}</Text>
-                    <Text style={styles.smallBox2SubText}>{t('TotalCost')}</Text>
+                    <Text style={styles.smallBox2Text}>{totalCost ? `${arabicNumbers    (totalCost)}€` : '0€'}</Text>
+                    <Text style={[styles.smallBox2SubText, textAlign]}>{t('TotalCost')}</Text>
                 </View>
             </View>
             <TouchableOpacity style={styles.StopChargingButton} onPress={stopCharging}>
