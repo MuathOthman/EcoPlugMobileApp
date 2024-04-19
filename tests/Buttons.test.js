@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import Availability from './Components/Availability';
+import Availability from '../Components/Availability';
 import { describe, test } from "@jest/globals";
 import { NavigationContainer } from '@react-navigation/native';
 
